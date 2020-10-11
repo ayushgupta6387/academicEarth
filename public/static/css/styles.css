@@ -3,6 +3,7 @@ body{
     background-image: linear-gradient(to left, rgba(0, 0, 255, 0.5), #8000ffbe);
     /* background-image: linear-gradient(to left, rgb(66, 66, 160), lightblue); */
     /* margin-top: 150px !important; */
+    /* min-width: 371px; */
 }
 #nprogress .bar{
     height: 2px !important;
@@ -126,4 +127,14 @@ form{
 .register-left .btn-primary:hover{
     background: #000;
 }
-
+.forgot{
+    margin-top: 50px;
+}
+.forgot a{
+    color: black;
+}
+.forgot a:hover{
+    color: blue;
+    text-decoration: none;
+    
+}

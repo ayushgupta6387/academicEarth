@@ -61,6 +61,10 @@ const handleSubmit = e => {
         <div className="form-group">
           <button className="formbtn btn btn-outline-warning">{buttonText}</button>
         </div>
+        <div className="form-group forgot">
+        <a href="">Forgot Password?</a>
+        </div>
+
     </form>
 
     return ( 

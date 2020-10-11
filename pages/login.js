@@ -30,7 +30,10 @@ const signinForm = () =>
     <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" />
 </div>
 <div className="form-group">
-          <button className="formbtn btn btn-outline-warning">{buttonText}</button>
+    <button className="formbtn btn btn-outline-warning">{buttonText}</button>
+</div>
+<div className="form-group forgot">
+        <a href="">Forgot Password?</a>
         </div>
 </form>
 
