@@ -8,10 +8,11 @@ const Login = () => {
         email: '',
         password: '',
         error: '',
-        success: ''
+        success: '',
+        buttonText: 'Login'
     })
 
-const {email, password} = state;
+const {email, password, buttonText} = state;
     
 const handleChange = () =>{};
 const handleSubmit = (e) =>{
@@ -28,7 +29,9 @@ const signinForm = () =>
     <label className="label1" for="">Password</label>
     <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" />
 </div>
-
+<div className="form-group">
+          <button className="formbtn btn btn-outline-warning">{buttonText}</button>
+        </div>
 </form>
 
 return(
