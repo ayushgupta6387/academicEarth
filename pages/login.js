@@ -28,6 +28,7 @@ const signinForm = () =>
     <label className="label1" for="">Password</label>
     <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" />
 </div>
+
 </form>
 
 return(
@@ -36,7 +37,8 @@ return(
     <div className="row">
     <div className="col-md-5 register-left">
             <img src={"/images/r1.jpg"} alt="imageHere" />
-            <h3>Log in for more fun!</h3>
+            <h5>You only have to know one thing:</h5>
+            <h3>You can learn Anything!</h3>
             <h1>Academic Earth</h1>
             <p>E-learning Platform</p>
             <button type="button" class="btn btn-primary">About</button>
