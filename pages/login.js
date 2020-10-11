@@ -14,7 +14,9 @@ const Login = () => {
 const {email, password} = state;
     
 const handleChange = () =>{};
-const handleSubmit = () =>{};
+const handleSubmit = (e) =>{
+    e.preventDefault();
+};
 
 const signinForm = () =>
 <form className onSubmit={handleSubmit}>
