@@ -61,6 +61,10 @@ const handleSubmit = e => {
         <div className="form-group">
           <button className="formbtn btn btn-outline-warning">{buttonText}</button>
         </div>
+        <div className="form-group forgot">
+        <a href="">Forgot Password?</a>
+        </div>
+
     </form>
 
     return ( 
@@ -68,7 +72,7 @@ const handleSubmit = e => {
     <div className="container">
     <div className="row">
     <div className="col-md-5 register-left">
-            <img src={"/images/r1.jpg"} alt="hhehuhu" />
+            <img src={"/images/r1.jpg"} alt="imageHere" />
             <h3>Join Us</h3>
             <h1>Academic Earth</h1>
             <p>E-learning Platform</p>
@@ -79,7 +83,7 @@ const handleSubmit = e => {
             <br />
             {registerForm()}
             <br />
-            {/* {JSON.stringify(state)} */}
+            {JSON.stringify(state)}
         </div>
         </div>
         </div>
