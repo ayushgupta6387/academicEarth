@@ -55,13 +55,24 @@ userSchema.virtual('password')
     // create temp variable called  _password
     this._password = password;
     // generate salt
+    // salt reference to salt in schema
+        this.salt = makeSalt();
 
     // encrypt password
+        this.hashed_password = encryptPassword(password);
+
 })
 .get(function(){
     return this._password
 })
 
-userSchema.methods={
+userSchema.methods = {
+    encryptPassword: function(password){
+    if(!password) return ''
+    try{
 
+    }catch (err){
+        return ''
+    }
+    }
 };
