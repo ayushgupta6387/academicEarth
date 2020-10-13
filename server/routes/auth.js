@@ -2,9 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get('/api/register', (req, res) => {
+router.get('/register', (req, res) => {
     res.json({
-        data: 'you hit register endpoint'
+        data: 'you hit register endpoint middleware...'
     });
 });
 
