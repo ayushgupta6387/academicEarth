@@ -71,6 +71,10 @@ userSchema.methods = {
     encryptPassword: function(password){
     if(!password) return ''
     try{
+        // this will make password encrypted
+        return crypto.createHmac('sha1', this.salt)
+                .update(password)
+                .digest('hex');
 
     }catch (err){
         return ''
