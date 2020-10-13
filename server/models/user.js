@@ -92,3 +92,7 @@ userSchema.methods = {
         return Math.round(new Date().valueOf * Math.random()) + ''; 
     }
 };
+
+// export user model
+
+module.exports = mongoose.model('User', userSchema);
