@@ -2,6 +2,9 @@ const express = require("express");
 
 const app = express();
 
+// import routes
+const authRoutes = require('./routes/auth');
+
 // receive the request that is coming from client side
 app.get('/api/register', (req, res) => {
     res.json({
