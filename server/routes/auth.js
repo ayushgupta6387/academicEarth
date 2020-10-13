@@ -2,11 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get('/register', (req, res) => {
-    res.json({
-        data: 'you hit register endpoint middleware...'
-    });
-});
+// import from controller
+const {register} = require('../controllers/auth');
 
+router.get('/register');
 // export router so that we can use it on other files
 module.exports = router;
