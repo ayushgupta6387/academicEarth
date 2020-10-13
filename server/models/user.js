@@ -48,3 +48,20 @@ const userSchema = new mongoose.Schema(
 //   this will give detail when user updated in database
   { timestamps: true }
 );
+
+// virtual fields
+userSchema.virtual('password')
+    .set(function(password){
+    // create temp variable called  _password
+    this._password = password;
+    // generate salt
+
+    // encrypt password
+})
+.get(function(){
+    return this._password
+})
+
+userSchema.methods={
+
+};
