@@ -68,18 +68,26 @@ userSchema.virtual('password')
 })
 
 userSchema.methods = {
-    encryptPassword: function(password){
-    if(!password) return ''
-    try{
-        // this will make password encrypted
-        return crypto.createHmac('sha1', this.salt)
-                .update(password)
-                .digest('hex');
 
-    }catch (err){
-        return ''
-    }
+    // creating a authenticate method
+    authenticate: function(plainText){
+        return this.encryptPassword(plainText) === this.hashed_password
     },
+
+    // creating a encryptPassword method
+    encryptPassword: function(password){
+        if(!password) return ''
+        try{
+            // this will make password encrypted
+            return crypto.createHmac('sha1', this.salt)
+            .update(password)
+            .digest('hex');
+            
+        }catch (err){
+            return ''
+        }
+    },
+    // creating a makeSalt method
     makeSalt: function(){
         return Math.round(new Date().valueOf * Math.random()) + ''; 
     }
