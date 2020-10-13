@@ -93,6 +93,6 @@ userSchema.methods = {
     }
 };
 
-// export user model
+// exporting user model for the use in another files
 
 module.exports = mongoose.model('User', userSchema);
