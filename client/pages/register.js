@@ -35,6 +35,7 @@ const handleSubmit = e => {
     e.preventDefault();
     // console.table(name, email, password);
     // passing data to below end point(in backend) with respective data (making a post request with axios)
+    // sending data from client side to backend
     axios.post('http://localhost:8000/api/register', {
         name, email, password
         // after writing this we get data on server because in register(in controller we have written req.body)
