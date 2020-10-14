@@ -1,5 +1,3 @@
 exports.register = (req, res) => {
-  res.json({
-    data: "you are fire...",
-  });
+  console.log("REGISTER CONTROLLER", req.body);
 };
