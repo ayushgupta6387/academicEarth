@@ -13,7 +13,10 @@ require('dotenv').config();
 
 const app = express();
 
-// using mongodb
+// using mongodbAtlas
+mongoose.connect(process.env.DATABASE_CLOUD)
+.then( () => console.log('DB connected'))
+.catch( (err) => console.log(err))
 
 
 // import routes
