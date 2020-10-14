@@ -2,6 +2,8 @@ import {useState} from 'react';
 import Layout from '../components/layout';
 // import eyes from '../public/images/r1.jpg';
 
+import axios from 'axios';
+
 
 const Register = () => {
 
@@ -31,8 +33,12 @@ const Register = () => {
 const handleSubmit = e => {
     // to prevent reloading of page
     e.preventDefault();
-    console.table(name, email, password);
-}
+    // console.table(name, email, password);
+    // passing data to below end point(in backend) with respective data (making a post request with axios)
+    axios.post('http://localhost:8000/api/register', {
+        name, email, password
+    });
+};
     
 
     const registerForm = () => 
