@@ -37,7 +37,10 @@ const handleSubmit = e => {
     // passing data to below end point(in backend) with respective data (making a post request with axios)
     axios.post('http://localhost:8000/api/register', {
         name, email, password
-    });
+        // after writing this we get data on server because in register(in controller we have written req.body)
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error)); 
 };
     
 
