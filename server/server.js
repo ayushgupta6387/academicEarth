@@ -23,6 +23,7 @@ const authRoutes = require('./routes/auth');
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 // app.use(cors());
+// give client url CLIENT_URL coming from env file
 app.use(cors({ origin: process.env.CLIENT_URL }));
 
 // get: receive the request that is coming from client side
