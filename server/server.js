@@ -14,7 +14,7 @@ require('dotenv').config();
 const app = express();
 
 // using mongodbAtlas
-mongoose.connect(process.env.DATABASE_CLOUD)
+mongoose.connect(process.env.DATABASE_CLOUD,{ useNewUrlParser: true, useUnifiedTopology: true  })
 .then( () => console.log('DB connected'))
 .catch( (err) => console.log(err))
 
