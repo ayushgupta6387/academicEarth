@@ -43,12 +43,16 @@ exports.register = (req, res) => {
   sendEmailOnRegister
   .then(data => {
     console.log('email submitted to SES', data);
-    res.send('Email sent');
+   res.json({
+     message: `Email has been sent to ${email}, Follow the instructions to complete your registration`
+   })
   })
 
   .catch(error => {
     console.log('ses email on register', error);
-    res.send('email failed');
+    res.json({
+      error: `We could not verify your email. Please try again`
+    })
   });
 });
 };
