@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const AWS = require('aws-sdk');
+const jwt = require('jsonwebtoken');
 
 AWS.config.update({
   accessKeyId:process.env.AWS_ACCESS_KEY_ID,
@@ -23,30 +24,42 @@ exports.register = (req, res) => {
       return res.status(400).json({
         error: 'Email is taken'
       })
-      
     }
-  })
+    // GENERATE TOKEN WITH USERNAME EMAIL PASSWORD
+    // create token to activete account
+    const token = jwt.sign({name, email, password}, process.env.JWT_ACCOUNT_ACTIVATION, {
+      expiresIn: '10m'
+    });
 
-  const params = {
-    Source:process.env.EMAIL_FROM,
-    Destination: {
-      // this should be a array
-      ToAddresses: [email]
-    },
-    ReplyToAddresses: [process.env.EMAIL_TO],
-    Message:{
-      Body:{
-        Html:{
-          Charset: 'UTF-8',
-          Data: `<html><body><h1>Hello ${name}</h1 style="color:red;"><p>Test Email</p></body></html>`
-        }
+
+    // send email
+    const params = {
+      Source:process.env.EMAIL_FROM,
+      Destination: {
+        // this should be a array
+        ToAddresses: [email]
       },
-      Subject: {
-        Charset: 'UTF-8',
-        Data: 'Complete Your Registration'
+      ReplyToAddresses: [process.env.EMAIL_TO],
+      Message:{
+        Body:{
+          Html:{
+            Charset: 'UTF-8',
+            Data: `<html>
+            <h1>Verify your email address</h1>
+            <p>Please use the following link to complete your registration:</p>
+            <p>${process.env.CLIENT_URL}/auth/activate/${token}</p>
+            </html>`
+          }
+        },
+        Subject: {
+          Charset: 'UTF-8',
+          Data: 'Complete Your Registration'
+        }
       }
-    }
-  };
+    };
+  
+
+ 
   const sendEmailOnRegister = ses.sendEmail(params).promise();
 
   sendEmailOnRegister
@@ -59,4 +72,5 @@ exports.register = (req, res) => {
     console.log('ses email on register', error);
     res.send('email failed');
   });
+});
 };
