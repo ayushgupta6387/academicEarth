@@ -44,6 +44,7 @@ exports.register = (req, res) => {
   .then(data => {
     console.log('email submitted to SES', data);
    res.json({
+    //  send this message to register.js(client side) also
      message: `Email has been sent to ${email}, Follow the instructions to complete your registration`
    })
   })

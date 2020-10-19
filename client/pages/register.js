@@ -46,7 +46,9 @@ const handleSubmit = e => {
             name:'',
             email:'',
             password:'',
-            buttonText:'Submitted'
+            buttonText:'Submitted',
+            // message is coming from controllers-->auth.js
+            success:response.data.message
         })
     })
     .catch(error => console.log(error)); 
