@@ -31,38 +31,40 @@ const Register = () => {
         setState({...state, [name]: e.target.value, error: '', success: '', buttonText: 'Register Me'})
     };
 
-const handleSubmit = e => {
-    // to prevent reloading of page
-    e.preventDefault();
 
-    // this buttonText is shown when click on register me button
-    setState({...state, buttonText: 'Registering'})
+    const handleSubmit = async e => {
+
+        // to prevent reloading of page
+        e.preventDefault();
     
-    // console.table(name, email, password);
-    // passing data to below end point(in backend) with respective data (making a post request with axios)
-    // sending data from client side to backend
-    axios.post('http://localhost:8000/api/register', {
-        name, email, password
-        // after writing this we get data on server because in register(in controller we have written req.body)
-    })
-    .then(response =>{
-        // after successfull submission all the fields needs to be empty 
-        console.log(response)
-        setState({
-            ...state,
-            name:'',
-            email:'',
-            password:'',
-            buttonText:'Submitted',
-            // message is coming from controllers-->auth.js
-            success:response.data.message
-        })
-    })
-    .catch(error => {
-        console.log(response)
-        setState({...state, buttonText: 'Register', error: error.response.data.error})
-    }); 
-};
+        // this buttonText is shown when click on register me button
+        setState({...state, buttonText: 'Registering'})
+        try{
+            // console.table(name, email, password);
+            // passing data to below end point(in backend) with respective data (making a post request with axios)
+            // sending data from client side to backend
+            const response = await axios.post('http://localhost:8000/api/register',{
+                
+                name, email, password
+                // after writing this we get data on server because in register(in controller we have written req.body)
+            })
+            console.log(response)
+            setState({
+                // after successfull submission all the fields needs to be empty 
+                ...state,
+                name:'',
+                email:'',
+                password:'',
+                buttonText:'Submitted',
+                // message is coming from controllers-->auth.js
+                success:response.data.message
+            })
+        }
+            catch (error){
+                    console.log(response)
+                    setState({...state, buttonText: 'Register', error: error.response.data.error})
+                }
+        }
     
 
     const registerForm = () => 
