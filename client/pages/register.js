@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
-import {API} from '../config';
+import { API } from '../config';
 
 
 const Register = () => {
