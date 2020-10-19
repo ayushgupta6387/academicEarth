@@ -1,4 +1,4 @@
-
+const User = require('../models/user');
 const AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -15,6 +15,18 @@ exports.register = (req, res) => {
   // console.log("REGISTER CONTROLLER", req.body);
 
   const {name, email, password} = req.body;
+
+  // check if user exists in our db
+  User.findOne({email}).exec((err, user)=>{
+    if (user) {
+      // console.log(err)
+      return res.status(400).json({
+        error: 'Email is taken'
+      })
+      
+    }
+  })
+
   const params = {
     Source:process.env.EMAIL_FROM,
     Destination: {
