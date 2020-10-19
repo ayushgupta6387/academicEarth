@@ -42,7 +42,9 @@ const handleSubmit = e => {
     })
     .then(response =>{
         // after successfull submission all the fields needs to be empty 
+        console.log(response)
         setState({
+            ...state,
             name:'',
             email:'',
             password:'',
@@ -52,6 +54,7 @@ const handleSubmit = e => {
         })
     })
     .catch(error => {
+        console.log(response)
         setState({...state, buttonText: 'Register', error: error.response.data.error})
     }); 
 };
@@ -91,6 +94,8 @@ const handleSubmit = e => {
 
     return ( 
     <Layout>
+    {success && success}
+    {error && error}
     <div className="container">
     <div className="row">
     <div className="col-md-5 register-left">
