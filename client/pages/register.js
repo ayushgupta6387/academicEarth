@@ -40,7 +40,15 @@ const handleSubmit = e => {
         name, email, password
         // after writing this we get data on server because in register(in controller we have written req.body)
     })
-    .then(response => console.log(response))
+    .then(response =>{
+        // after successfull submission all the fields needs to be empty 
+        setState({
+            name:'',
+            email:'',
+            password:'',
+            buttonText:'Submitted'
+        })
+    })
     .catch(error => console.log(error)); 
 };
     
