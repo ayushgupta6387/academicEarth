@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 // import eyes from '../public/images/r1.jpg';
 
 import axios from 'axios';
+import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
 
 
 const Register = () => {
@@ -98,8 +99,6 @@ const handleSubmit = e => {
 
     return ( 
     <Layout>
-    {success && success}
-    {error && error}
     <div className="container">
     <div className="row">
     <div className="col-md-5 register-left">
@@ -112,9 +111,10 @@ const handleSubmit = e => {
         <div className="full col-md-7 register-right">
             <h1>Register Here</h1>
             <br />
+            {/* these below 2 lines to show alerts */}
+            {success && showSuccessMessage(success)}
+            {error && showErrorMessage(error)}
             {registerForm()}
-            <br />
-            {JSON.stringify(state)}
         </div>
         </div>
         </div>
