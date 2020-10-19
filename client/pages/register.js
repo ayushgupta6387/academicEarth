@@ -51,7 +51,9 @@ const handleSubmit = e => {
             success:response.data.message
         })
     })
-    .catch(error => console.log(error)); 
+    .catch(error => {
+        setState({...state, buttonText: 'Register', error: error.response.data.error})
+    }); 
 };
     
 
