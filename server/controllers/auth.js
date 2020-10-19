@@ -44,15 +44,16 @@ exports.register = (req, res) => {
   .then(data => {
     console.log('email submitted to SES', data);
    res.json({
-    //  send this message to register.js(client side) also
-     message: `Email has been sent to ${email}, Follow the instructions to complete your registration`
-   })
+    //  send this message to register.js(client side) also in handle submit in .then
+    message: `Email has been sent to ${email}, Follow the instructions to complete your registration`
   })
+})
 
-  .catch(error => {
-    console.log('ses email on register', error);
-    res.json({
-      error: `We could not verify your email. Please try again`
+.catch(error => {
+  console.log('ses email on register', error);
+  res.json({
+    //  send this message to register.js(client side) also in handle submit in .catch
+      message: `We could not verify your email. Please try again`
     })
   });
 });

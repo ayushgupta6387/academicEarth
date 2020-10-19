@@ -33,6 +33,10 @@ const Register = () => {
 const handleSubmit = e => {
     // to prevent reloading of page
     e.preventDefault();
+
+    // this buttonText is shown when click on register me button
+    setState({...state, buttonText: 'Registering'})
+    
     // console.table(name, email, password);
     // passing data to below end point(in backend) with respective data (making a post request with axios)
     // sending data from client side to backend
