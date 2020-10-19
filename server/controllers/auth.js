@@ -7,7 +7,8 @@ AWS.config.update({
   region:process.env.AWS_REGION
 });
 
-
+// creating aws ses instance
+const ses = new AWS.ses({apiVersion: 2010-12-01});
 
 exports.register = (req, res) => {
   // console.log("REGISTER CONTROLLER", req.body);
