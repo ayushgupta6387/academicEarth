@@ -4,6 +4,7 @@ import Layout from '../components/layout';
 
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
+import {API} from '../config';
 
 
 const Register = () => {
@@ -43,12 +44,13 @@ const Register = () => {
             // console.table(name, email, password);
             // passing data to below end point(in backend) with respective data (making a post request with axios)
             // sending data from client side to backend
-            const response = await axios.post('http://localhost:8000/api/register',{
+            // http://localhost:8000/api replaced by API
+            const response = await axios.post(`${API}/register`,{
                 
                 name, email, password
                 // after writing this we get data on server because in register(in controller we have written req.body)
-            })
-            console.log(response)
+            });
+            console.log(response);
             setState({
                 // after successfull submission all the fields needs to be empty 
                 ...state,
@@ -58,11 +60,11 @@ const Register = () => {
                 buttonText:'Submitted',
                 // message is coming from controllers-->auth.js
                 success:response.data.message
-            })
+            });
         }
             catch (error){
-                    console.log(response)
-                    setState({...state, buttonText: 'Register', error: error.response.data.error})
+                    console.log(error);
+                    setState({...state, buttonText: 'Register', error: error.response.data.error});
                 }
         }
     
