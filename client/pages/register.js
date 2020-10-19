@@ -44,8 +44,8 @@ const Register = () => {
             // console.table(name, email, password);
             // passing data to below end point(in backend) with respective data (making a post request with axios)
             // sending data from client side to backend
-            // http://localhost:8000/api replaced by API
-            const response = await axios.post(`${API}/register`,{
+            // http://localhost:8000/api replaced by ${API} not working
+            const response = await axios.post(`http://localhost:8000/api/register`,{
                 
                 name, email, password
                 // after writing this we get data on server because in register(in controller we have written req.body)
