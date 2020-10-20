@@ -1,3 +1,5 @@
+import {useState, useEffect} from 'react'
+import jwt from 'jsonwebtoken';
 
 // by writing this we get the link which is sent to user by email, on separate page when user click on that link
 import { withRouter } from 'next/router';
