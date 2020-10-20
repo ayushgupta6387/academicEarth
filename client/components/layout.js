@@ -2,6 +2,7 @@
 // import head in nextjs
 import Head from 'next/head';
 import Link from 'next/link';
+import { isAuth, logout } from '../helpers/auth'
 // import Router from 'next/router';
 // import NProgress from 'nprogress';
 // import 'nprogress/nprogress.css';
@@ -46,6 +47,9 @@ const Head = () => (
             <Link href="/register">
             <a className="nav-link text-white" href="/register">Register</a>
             </Link>
+            </li>
+            <li className="nav-item">
+            <a onClick={logout} className="nav-link text-white" href="/register">Logout</a>
             </li>
             {/* by giving href value(href="/login") in anchor tag we can directly open pages from navigation bar */}
         </ul>
