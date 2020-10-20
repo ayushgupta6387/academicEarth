@@ -17,22 +17,48 @@ const Login = () => {
         buttonText: 'Login'
     })
 
-const {email, password, buttonText} = state;
+const {email, password, error, success, buttonText} = state;
     
-const handleChange = () =>{};
-const handleSubmit = (e) =>{
-    e.preventDefault();
+const handleChange = name => e =>{
+    // if previous error or success mgsg is showing hide that
+    setState({...state, [name]: e.target.value, error: '', success: '', buttonText: 'Login'})
 };
+const handleSubmit = async e => {
 
-const signinForm = () =>
+    // to prevent reloading of page
+    e.preventDefault();
+
+    // this buttonText is shown when click on register me button
+    setState({...state, buttonText: 'Logging in'})
+    try{
+        // console.table(name, email, password);
+        // passing data to below end point(in backend) with respective data (making a post request with axios)
+        // sending data from client side to backend
+        // http://localhost:8000/api replaced by ${API} not working
+        const response = await axios.post(`http://localhost:8000/api/login`, {
+             email, 
+             password
+            // after writing this we get data on server because in register(in controller we have written req.body)
+        });
+        console.log(response);
+        
+    }
+        catch (error){
+                console.log(error);
+                setState({...state, buttonText: 'Login', error: error.response.data.error});
+            }
+    }
+
+
+const LoginForm = () =>
 <form className onSubmit={handleSubmit}>
 <div className="form-group">
     <label className="label1" for="">E-mail</label>
-    <input type="email" onChange={handleChange('email')} value={email} className="input form-control" placeholder="Type Your Email" />
+    <input type="email" onChange={handleChange('email')} value={email} className="input form-control" placeholder="Type Your Email" required />
 </div>
 <div className="form-group">
     <label className="label1" for="">Password</label>
-    <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" />
+    <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" required />
 </div>
 <div className="form-group">
     <button className="formbtn btn btn-outline-warning">{buttonText}</button>
@@ -57,9 +83,10 @@ return(
         <div className="full col-md-7 register-right">
             <h1>Login Here</h1>
             <br />
-            {signinForm()}
-            <br />
-            {/* {JSON.stringify(state)} */}
+            {success && showSuccessMessage(success)}
+            {error && showErrorMessage(error)}
+            {LoginForm()}
+           
         </div>
         </div>
         </div>
