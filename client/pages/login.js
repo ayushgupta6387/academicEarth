@@ -42,10 +42,10 @@ const handleSubmit = async e => {
             // after writing this we get data on server because in register(in controller we have written req.body)
         });
         // console.log(response); // data > token/user
-        authenticate(response, () => {
+        authenticate(response, () => Router.push('/'));
             // when user successfully login redirect them to homepage
-            Router.push('/');
-        })
+            
+        
         
     }
         catch (error){
