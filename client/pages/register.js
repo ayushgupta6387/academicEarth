@@ -45,9 +45,11 @@ const Register = () => {
             // passing data to below end point(in backend) with respective data (making a post request with axios)
             // sending data from client side to backend
             // http://localhost:8000/api replaced by ${API} not working
-            const response = await axios.post(`http://localhost:8000/api/register`,{
+            const response = await axios.post(`http://localhost:8000/api/register`, {
                 
-                name, email, password
+                name,
+                 email, 
+                 password
                 // after writing this we get data on server because in register(in controller we have written req.body)
             });
             console.log(response);
@@ -69,6 +71,61 @@ const Register = () => {
         }
     
 
+
+// before applying async and await in handleSubmit
+// const handleSubmit = e => {
+    //     e.preventDefault();
+    //     setState({ ...state, buttonText: 'Registering' });
+    //     // console.table({ name, email, password });
+    //     axios
+    //         .post(`http://localhost:8000/api/register`, {
+    //             name,
+    //             email,
+    //             password
+    //         })
+    //         .then(response => {
+    //             console.log(response);
+    //             setState({
+    //                 ...state,
+    //                 name: '',
+    //                 email: '',
+    //                 password: '',
+    //                 buttonText: 'Submitted',
+    //                 success: response.data.message
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //             setState({ ...state, buttonText: 'Register', error: error.response.data.error });
+    //         });
+    // };
+
+
+// downloaded
+        // const handleSubmit = async e => {
+        //     e.preventDefault();
+        //     setState({ ...state, buttonText: 'Registering' });
+        //     try {
+        //         const response = await axios.post(`${API}/register`, {
+        //             name,
+        //             email,
+        //             password
+        //         });
+        //         console.log(response);
+        //         setState({
+        //             ...state,
+        //             name: '',
+        //             email: '',
+        //             password: '',
+        //             buttonText: 'Submitted',
+        //             success: response.data.message
+        //         });
+        //     } catch (error) {
+        //         console.log(error);
+        //         setState({ ...state, buttonText: 'Register', error: error.response.data.error });
+        //     }
+        // };    
+
     const registerForm = () => 
     <form className onSubmit = {handleSubmit}>
 
@@ -77,19 +134,19 @@ const Register = () => {
         <label className="label1" for="">UserName</label>
         {/* by passing param. in ohandlehange func. we will know from where it is coming(from name or email...)  */}
 
-            <input onChange={handleChange('name')}  value={name} type="text" className="input form-control" placeholder="Type Your name"/>
+            <input onChange={handleChange('name')}  value={name} type="text" className="input form-control" placeholder="Type Your name" required/>
         </div>
 
         <div className="form-group">
 
         <label className="label1" for="">E-mail</label>
-            <input onChange={handleChange('email')} value={email} type="email" className="input form-control" placeholder="Type Your email"/>
+            <input onChange={handleChange('email')} value={email} type="email" className="input form-control" placeholder="Type Your email" required/>
         </div>
         
         <div className="form-group">
 
         <label className="label1" for="">Password</label>
-            <input onChange={handleChange('password')} value={password} type="password" className="input form-control" placeholder="Type Your password"/>
+            <input onChange={handleChange('password')} value={password} type="password" className="input form-control" placeholder="Type Your password" required/>
         </div>
 
         <div className="form-group">
