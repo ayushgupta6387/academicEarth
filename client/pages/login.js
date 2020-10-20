@@ -47,11 +47,9 @@ const handleSubmit = async e => {
             // after writing this we get data on server because in register(in controller we have written req.body)
         });
         // console.log(response); // data > token/user
-        authenticate(response, () => Router.push('/'));
-            // when user successfully login redirect them to homepage
+        authenticate(response, () => isAuth && isAuth().role === 'admin' ? Router.push('/admin') : Router.push('/user'));
+            // when user successfully login redirect them to admin or user page
             
-        
-        
     }
         catch (error){
                 console.log(error);
