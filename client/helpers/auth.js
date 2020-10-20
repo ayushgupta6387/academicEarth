@@ -1,4 +1,5 @@
 import cookie from 'js-cookie';
+import  Router  from 'next/router';
 
 
 // set in cookie -- save cookie in browser cookie
@@ -14,9 +15,9 @@ export const setCookie = (key, value) => {
 
 
 // remove from cookie -- when user signout we have to remove cookie from browser cookie
-export const deleteCookie = (key) => {
+export const removeCookie = (key) => {
     if(process.browser){ 
-        cookie.set(key)
+        cookie.remove(key)
     }
 }
 
@@ -65,4 +66,11 @@ export const isAuth = () =>{
             }
         }
     }
+}
+
+// clear cookie and localstorage after logout
+export const logout = () => {
+    removeCookie('token');
+    removeLocalStorage('user');
+    Router.push('/login');
 }
