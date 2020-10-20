@@ -5,6 +5,7 @@ import Router from 'next/router'
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
 import { API } from '../config';
+import {authenticate} from '../helpers/auth'
 
 // by searching like http://localhost:3000/login we will get this page or any other page just write name of file
 const Login = () => {
@@ -40,7 +41,11 @@ const handleSubmit = async e => {
              password
             // after writing this we get data on server because in register(in controller we have written req.body)
         });
-        console.log(response); // data > token/user
+        // console.log(response); // data > token/user
+        authenticate(response, () => {
+            // when user successfully login redirect them to homepage
+            Router.push('/');
+        })
         
     }
         catch (error){
