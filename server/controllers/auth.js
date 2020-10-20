@@ -2,6 +2,7 @@ const User = require('../models/user');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
 const { registerEmailParams } = require('../helpers/email');
+const shortId = require('shortid');
 
 AWS.config.update({
   accessKeyId:process.env.AWS_ACCESS_KEY_ID,
@@ -71,6 +72,8 @@ exports.registerActivate = (req, res) =>{
         error: 'Expired link Try again'
       })
     }
-  })
+      const {name, email, password}= jwt.decode(token);
+      const username = shortId.generate();
+  });
 
-}
+};
