@@ -64,5 +64,13 @@ exports.register = (req, res) => {
 exports.registerActivate = (req, res) =>{
   const { token } = req.body;
   // console.log(token);
+  // verify token for( 10 minutes) if it is after 10 min. then gene. error
+  jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function(err, decoded){
+    if(err){
+      return res.status(401).json({
+        error: 'Expired link Try again'
+      })
+    }
+  })
 
 }
