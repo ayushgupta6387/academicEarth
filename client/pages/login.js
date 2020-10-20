@@ -40,7 +40,7 @@ const handleSubmit = async e => {
              password
             // after writing this we get data on server because in register(in controller we have written req.body)
         });
-        console.log(response);
+        console.log(response); // data > token/user
         
     }
         catch (error){
