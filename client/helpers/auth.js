@@ -53,7 +53,7 @@ export const authenticate = (response, next) =>{
 }
 
 
-// access user info from localStorage
+// access user info from localStorage --> if the user is logged in then its info is in localStorage
 export const isAuth = () =>{
     if (process.browser) {
         const cookieChecked = getCookie('token')

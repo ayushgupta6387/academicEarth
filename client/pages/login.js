@@ -5,7 +5,7 @@ import Router from 'next/router'
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
 import { API } from '../config';
-import {authenticate} from '../helpers/auth'
+import {authenticate, isAuth} from '../helpers/auth'
 
 // by searching like http://localhost:3000/login we will get this page or any other page just write name of file
 const Login = () => {
@@ -17,6 +17,11 @@ const Login = () => {
         success: '',
         buttonText: 'Login'
     })
+
+// by writing this useEffect-- if the user is logged in then whenever they try to open signin page it will redirect them to home page
+useEffect(() => {
+    isAuth() && Router.push('/');
+}, []);
 
 const {email, password, error, success, buttonText} = state;
     
@@ -87,6 +92,7 @@ return(
             </div>
         <div className="full col-md-7 register-right">
             <h1>Login Here</h1>
+            {/* {JSON.stringify(isAuth())}  by writing this we get all the details on login page of logged in user(id, name, role...)*/}
             <br />
             {success && showSuccessMessage(success)}
             {error && showErrorMessage(error)}
