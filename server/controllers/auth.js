@@ -58,3 +58,11 @@ exports.register = (req, res) => {
   });
 });
 };
+
+
+// register/Activate
+exports.registerActivate = (req, res) =>{
+  const { token } = req.body;
+  // console.log(token);
+
+}
