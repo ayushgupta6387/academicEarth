@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Layout from '../components/layout';
 // import eyes from '../public/images/r1.jpg';
-
+import Router from 'next/router'
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
 import { API } from '../config';
-
+import { isAuth } from '../helpers/auth'
 
 const Register = () => {
 
@@ -23,6 +23,12 @@ const Register = () => {
         buttonText: 'Register Me'
 
     });
+
+
+// by writing this useEffect-- if the user is logged in then whenever they try to open signin page it will redirect them to home page
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, [])
 
     // now we use directly like buttonText in form where buttn created
     const {name, email, password, error, success, buttonText} = state;
