@@ -38,7 +38,13 @@ const Head = () => (
             <a className="nav-link text-white" href="/">Home</a>
             </Link>
             </li>
-            <li className="nav-item">
+            
+
+{/* now show login register button if they are not logged in */}
+{
+    !isAuth() && (
+        <React.Fragment>
+        <li className="nav-item">
             <Link href="/login">
             <a className="nav-link text-white" href="/login">Login</a>
             </Link>
@@ -48,6 +54,28 @@ const Head = () => (
             <a className="nav-link text-white" href="/register">Register</a>
             </Link>
             </li>
+            </React.Fragment>
+    )}
+
+
+{/* create user or admin on nav bar */}
+            {
+                isAuth() && isAuth().role === 'admin' && (
+                    <li className="nav-item ml-auto">
+            <Link href="/admin">
+            <a className="nav-link text-dark">Admin</a>
+            </Link>
+            </li>   
+                )}
+            {
+                isAuth() && isAuth().role === 'subscriber' && (
+                    <li className="nav-item ml-auto">
+            <Link href="/user">
+            <a className="nav-link text-dark">User</a>
+            </Link>
+            </li>   
+                )}
+
             <li className="nav-item">
             <a onClick={logout} className="nav-link text-white" href="/register">Logout</a>
             </li>

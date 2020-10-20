@@ -68,7 +68,7 @@ export const isAuth = () =>{
     }
 }
 
-// clear cookie and localstorage after logout
+// clear cookie and localstorage after logout and redirect to login Page
 export const logout = () => {
     removeCookie('token');
     removeLocalStorage('user');
