@@ -73,7 +73,19 @@ exports.registerActivate = (req, res) =>{
       })
     }
       const {name, email, password}= jwt.decode(token);
+      // generate unique username
       const username = shortId.generate();
+
+      // check already exist or not
+      User.findOne({email}).exec((err, user)=>{
+          if(user){
+            return res.status(401).json({
+              error: 'Email is taken'
+            })
+          }
+
+          // otherwise register new user
+      })
   });
 
 };
