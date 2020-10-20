@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '../../../helpers/alerts';
 import { API } from '../../../config';
+import Layout from '../../../components/layout';
 
 
 // by writing this we get the link which is sent to user by email, on separate page when user click on that link
@@ -17,7 +18,7 @@ const ActivateAccount = ({router}) => {
         error: ''
 
     })
-    return <div>{JSON.stringify(router)}</div>
+    return <Layout>{JSON.stringify(router)}</Layout>
 };
 
 export default withRouter(ActivateAccount);
