@@ -11,6 +11,7 @@ const {read} = require('../controllers/user');
 
 // routes
 // make request to /user, apply requireSignin so it is available if user logged in
-router.get('/user', requireSignin, adminMiddleware, read);
+router.get('/user', requireSignin, authMiddleware, read);
+router.get('/admin', requireSignin, adminMiddleware, read);
 
 module.exports = router;
