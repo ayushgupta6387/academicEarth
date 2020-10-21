@@ -146,6 +146,24 @@ exports.authMiddleware = (req, res, next)=>{
           error: "User not found"
         })
       }
+      // add user information in req.profile
+      req.profile = user
+      next()
+  })
+}
+exports.adminMiddleware = (req, res, next)=>{
+  const adminUserId = req.user._id
+  User.findOne({_id: adminUserId}).exec((err, user) =>{
+      if (err || !user) {
+        return res.status(400).json({
+          error: "User not found"
+        })
+      }
+      if (user.role ===! 'admin') {
+        return res.status(400).json({
+          error: "Admin resource. Access Denied"
+        })
+      }
       // it will get all the details of user
       req.profile = user
       next()
