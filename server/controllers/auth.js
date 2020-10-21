@@ -135,3 +135,19 @@ return res.json({
 // it will match with JWT_SECRET(which is in just above func) and expiry and get user_id available to us
 exports.requireSignin = expressJwt({ secret: process.env.JWT_SECRET, algorithms: ['RS256']}); // req.user
 
+// implementing middlewares
+// auth will check user have role of subscriber
+// admin middleware allow access to admin which means user with role of admin
+exports.authMiddleware = (req, res, next)=>{
+  const authUserId = req.user._id
+  User.findOne({_id: authUserId}).exec((err, user) =>{
+      if (err || !user) {
+        return res.status(400).json({
+          error: "User not found"
+        })
+      }
+      // it will get all the details of user
+      req.profile = user
+      next()
+  })
+}
