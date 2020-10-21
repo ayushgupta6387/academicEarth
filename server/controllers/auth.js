@@ -133,7 +133,7 @@ return res.json({
 
 // require signin match the token and make pages accessible if they are logged in
 // it will match with JWT_SECRET(which is in just above func) and expiry and get user_id available to us
-exports.requireSignin = expressJwt({ secret: process.env.JWT_SECRET, algorithms: ['RS256']}); // req.user
+exports.requireSignin = expressJwt({ secret: process.env.JWT_SECRET,  algorithms: ['sha1', 'RS256', 'HS256']}); // req.user
 
 // implementing middlewares
 // auth will check user have role of subscriber
