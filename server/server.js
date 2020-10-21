@@ -21,6 +21,7 @@ mongoose.connect(process.env.DATABASE_CLOUD,{ useNewUrlParser: true, useUnifiedT
 
 // import routes
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 // app middlewares
 app.use(morgan('dev'));
@@ -34,6 +35,7 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 // middleware: code that you want to run in middle
 // whenever we have request we are forwarding it to authRoutes
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 
 // this will give port 8000 because we have written in env file
