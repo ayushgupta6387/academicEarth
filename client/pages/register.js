@@ -137,7 +137,7 @@ const Register = () => {
 
         <div className="form-group">
 
-        <label className="label1" for="">UserName</label>
+        <label className="label1" htmlFor="">UserName</label>
         {/* by passing param. in ohandlehange func. we will know from where it is coming(from name or email...)  */}
 
             <input onChange={handleChange('name')}  value={name} type="text" className="input form-control" placeholder="Type Your name" required/>
@@ -145,13 +145,13 @@ const Register = () => {
 
         <div className="form-group">
 
-        <label className="label1" for="">E-mail</label>
+        <label className="label1" htmlFor="">E-mail</label>
             <input onChange={handleChange('email')} value={email} type="email" className="input form-control" placeholder="Type Your email" required/>
         </div>
         
         <div className="form-group">
 
-        <label className="label1" for="">Password</label>
+        <label className="label1" htmlFor="">Password</label>
             <input onChange={handleChange('password')} value={password} type="password" className="input form-control" placeholder="Type Your password" required/>
         </div>
 
@@ -173,7 +173,7 @@ const Register = () => {
             <h3>Join Us</h3>
             <h1>Academic Earth</h1>
             <p>E-learning Platform</p>
-            <button type="button" class="btn btn-primary">About</button>
+            <button type="button" className="btn btn-primary">About</button>
             </div>
         <div className="full col-md-7 register-right">
             <h1>Register Here</h1>

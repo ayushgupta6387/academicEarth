@@ -61,11 +61,11 @@ const handleSubmit = async e => {
 const LoginForm = () =>
 <form className onSubmit={handleSubmit}>
 <div className="form-group">
-    <label className="label1" for="">E-mail</label>
+    <label className="label1" htmlFor="">E-mail</label>
     <input type="email" onChange={handleChange('email')} value={email} className="input form-control" placeholder="Type Your Email" required />
 </div>
 <div className="form-group">
-    <label className="label1" for="">Password</label>
+    <label className="label1" htmlFor="">Password</label>
     <input type="password" onChange={handleChange('password')} value={password} className="input form-control" placeholder="Type Your Password" required />
 </div>
 <div className="form-group">
