@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 const { registerEmailParams } = require('../helpers/email');
 const shortId = require('shortid');
 
@@ -129,3 +130,8 @@ return res.json({
 });
   });
 };
+
+// require signin match the token and make pages accessible if they are logged in
+// it will match with JWT_SECRET(which is in just above func) and expiry and get user_id available to us
+exports.requireSignin = expressJwt({ secret: process.env.JWT_SECRET, algorithms: ['RS256']}); // req.user
+
