@@ -86,7 +86,7 @@ return(
             <h3>You can learn Anything!</h3>
             <h1>Academic Earth</h1>
             <p>E-learning Platform</p>
-            <button type="button" class="btn btn-primary">About</button>
+            <button type="button" className="btn btn-primary">About</button>
             </div>
         <div className="full col-md-7 register-right">
             <h1>Login Here</h1>

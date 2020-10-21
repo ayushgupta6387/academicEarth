@@ -39,5 +39,5 @@ app.use('/api', userRoutes);
 
 
 // this will give port 8000 because we have written in env file
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`API is running on port ${port}`));
