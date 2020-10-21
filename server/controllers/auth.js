@@ -159,7 +159,7 @@ exports.adminMiddleware = (req, res, next)=>{
           error: "User not found"
         })
       }
-      if (user.role !== 'admin') {
+      if (user.role ==! 'admin') {
         return res.status(400).json({
           error: "Admin resource. Access Denied"
         })
@@ -169,3 +169,8 @@ exports.adminMiddleware = (req, res, next)=>{
       next()
   })
 }
+
+
+
+
+algorithms: ['sha1', 'RS256', 'HS256']
