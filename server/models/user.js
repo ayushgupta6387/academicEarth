@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        // this is for the strength of the password
         salt: String,
         role: {
             type: String,
@@ -40,7 +39,6 @@ const userSchema = new mongoose.Schema(
             default: ''
         }
     },
-    // /   this will give detail when user updated in database
     { timestamps: true }
 );
 
@@ -50,9 +48,7 @@ userSchema
     .set(function(password) {
         // create temp variable called _password
         this._password = password;
-        
-           // generate salt
-    // salt reference to salt in schema
+        // generate salt
         this.salt = this.makeSalt();
         // encrypt password
         this.hashed_password = this.encryptPassword(password);
@@ -63,15 +59,13 @@ userSchema
 
 // methods > authenticate, encryptPassword, makeSalt
 userSchema.methods = {
-  // creating a authenticate method
     authenticate: function(plainText) {
         return this.encryptPassword(plainText) === this.hashed_password;
     },
- // creating a encryptPassword method
+
     encryptPassword: function(password) {
         if (!password) return '';
         try {
-          // this will make password encrypted
             return crypto
                 .createHmac('sha1', this.salt)
                 .update(password)
@@ -80,7 +74,6 @@ userSchema.methods = {
             return '';
         }
     },
-      // creating a makeSalt method
 
     makeSalt: function() {
         return Math.round(new Date().valueOf() * Math.random()) + '';

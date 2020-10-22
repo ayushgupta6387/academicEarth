@@ -1,6 +1,6 @@
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout';
 
-// "hello next treat as a children in layout"
-const Admin = () => <Layout>Hello Admin</Layout>
+const Admin = () => <Layout>hello Admin</Layout>;
 
 export default Admin;
+

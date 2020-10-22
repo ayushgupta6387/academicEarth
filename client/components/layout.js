@@ -3,17 +3,17 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { isAuth, logout } from '../helpers/auth'
-// import Router from 'next/router';
-// import NProgress from 'nprogress';
-// import 'nprogress/nprogress.css';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 // we are using link so that the page cannot refresh when we click on page in nav-bar
 
 // we can also use React.fragment instead of div
 
 // implementing progress
-// Router.onRouteChangeStart = url => NProgress.start();
-// Router.onRouteChangeComplete = url => NProgress.done();
-// Router.onRouteChangeError = url => NProgress.done();
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete = url => NProgress.done();
+Router.onRouteChangeError = url => NProgress.done();
 
 // destructuring children ("Hello Next from index.js")
 const Layout = ({children}) => {
