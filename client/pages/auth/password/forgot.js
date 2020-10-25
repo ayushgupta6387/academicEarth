@@ -7,24 +7,23 @@ import Router from "next/router";
 import Layout from "../../../components/Layout";
 
 const ForgotPassword = () => {
-  const [state, setstate] = useState({
+  const [state, setState] = useState({
     email: "",
-
     buttonText: "Forgit Password",
     success: "",
     error: "",
   });
   const { email, buttonText, success, error } = state;
-  const handleChange = (e) => {
-    setstate({ ...state, email: e.target.value,success:'',error:'' });
+  const handleChange = e => {
+    setState({ ...state, email: e.target.value, success: "", error: "" });
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     //console.log("post email to", email);
     try {
-      const response = await axios.put(`${API}/forgot-passwrd`, { email });
+      const response = await axios.put(`${API}/forgot-password`, { email });
       // console.log('forgot password',response)
-      setstate({
+      setState({
         ...state,
         email: "",
         buttonText: "Done",
@@ -33,18 +32,19 @@ const ForgotPassword = () => {
     } catch (error) {
       console.log("forgot password", error);
 
-      setstate({
+      setState({
         ...state,
         buttonText: "Forgot Password",
-        error: error.response.data.error,
+        error: error.response.data.error
       });
     }
   };
-  const passwordForgotForm = () => {
+  const passwordForgotForm = () => (
     <form onSubmit={handleSubmit}>
-      <div className ="form-group">
+      <div className="form-group">
+       
         <input
-          type='email'
+          type="email"
           className="form-control"
           onChange={handleChange}
           value={email}
@@ -56,8 +56,8 @@ const ForgotPassword = () => {
       <div>
         <button className="btn btn-outline-warning">{buttonText}</button>
       </div>
-    </form>;
-  };
+    </form>
+  );
 
   return (
     <Layout>
