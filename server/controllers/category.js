@@ -1,30 +1,86 @@
 const Category = require("../models/category");
 const slugify = require("slugify");
+const formidable = require("formidable");
+const uuidv4 = require("uuid/v4");
+const AWS = require("aws-sdk");
+const fs = require('fs')
+
+//s3
+const s3 = new AWS.s3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
 exports.create = (req, res) => {
-  const { name, content } = req.body;
-  const slug = slugify(name);
-  const image = {
-    url: "",
-    key: "123",
-  };
-
-
-
-  const category = new Category({ name, slug, image });
-  category.postedBy=req.user._id;
-  category.save((err, data) => {
+  let form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {
     if (err) {
-      console.log("category create error", err);
       return res.status(400).json({
-        error: " Category create failed",
+        error: "Image could not upload",
       });
     }
-    res.json({
-      data,
+    //console.table({err,files,files})
+    const { name, content } = fields;
+    const { image } = files;
+    const slug = slugify(name);
+    let category = new Category({ name, content, slug });
+
+    if (image.size > 2000000) {
+      return res.status(400).json({
+        error: "Image should be less tha 2mb",
+      });
+    }
+    //upload image to s3
+    const params = {
+      Bucket: "cloud9project",
+      Key: `category/${uuidv4()}`,
+      Body: fs.readFileSync(image.path),
+      ACL: "public-read",
+      ContentType: `image/jpg`,
+    };
+
+    s3.upload(params, (err, data) => {
+      if (err) {
+        return res.status(400).json({ error: "upload to s3 failed" });
+      }
+      console.log("AWS UPLOAD RES DATA", data);
+      (category.image.url = data.Location), (category.image.key = data.Key);
+
+      //save to db
+
+      category.save((err, success) => {
+        if (err) {
+          return res.status(400).json({ error: "ERROR saving category to db" });
+        }
+        return res.json(success);
+      });
     });
   });
 };
+
+// exports.create = (req, res) => {
+//   const { name, content } = req.body;
+//   const slug = slugify(name);
+//   const image = {
+//     url: "",
+//     key: "123",
+//   };
+
+//   const category = new Category({ name, slug, image });
+//   category.postedBy=req.user._id;
+//   category.save((err, data) => {
+//     if (err) {
+//       console.log("category create error", err);
+//       return res.status(400).json({
+//         error: " Category create failed",
+//       });
+//     }
+//     res.json({
+//       data,
+//     });
+//   });
+// };
 
 exports.list = (req, res) = {};
 exports.read = (req, res) = {};
