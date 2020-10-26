@@ -1,12 +1,12 @@
 const Category = require("../models/category");
 const slugify = require("slugify");
 const formidable = require("formidable");
-const uuidv4 = require("uuid/v4");
+const uuidv4 = require("uuidv4");
 const AWS = require("aws-sdk");
 const fs = require('fs')
 
 //s3
-const s3 = new AWS.s3({
+const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_REGION,
@@ -82,7 +82,7 @@ exports.create = (req, res) => {
 //   });
 // };
 
-exports.list = (req, res) = {};
-exports.read = (req, res) = {};
-exports.update = (req, res) = {};
-exports.remove = (req, res) = {};
+exports.list = (req, res) => {};
+exports.read = (req, res) => {};
+exports.update = (req, res) => {};
+exports.remove = (req, res) => {};
