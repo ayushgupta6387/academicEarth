@@ -71,9 +71,6 @@ const LoginForm = () =>
 <div className="form-group">
     <button className="formbtn btn btn-outline-warning">{buttonText}</button>
 </div>
-<div className="form-group forgot">
-        <a href="">Forgot Password?</a>
-        </div>
 </form>
 
 return(
@@ -96,7 +93,7 @@ return(
             {error && showErrorMessage(error)}
             {LoginForm()}
             <Link href="/auth/password/forgot">
-                <a className="text-danger float-right">Forgot Password</a>
+                <a className="text-danger">Forgot Password</a>
             </Link>
            
         </div>
