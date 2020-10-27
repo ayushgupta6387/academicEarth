@@ -1,7 +1,7 @@
 const Category = require("../models/category");
 const slugify = require("slugify");
 const formidable = require("formidable");
-const uuidv4 = require("uuidv4");
+const { v4: uuidv4 } = require('uuid');
 const AWS = require("aws-sdk");
 const fs = require('fs')
 
@@ -82,7 +82,18 @@ exports.create = (req, res) => {
 //   });
 // };
 
-exports.list = (req, res) => {};
+exports.list = (req, res) => {
+    Category.find({}).exec((err,data)=>{
+        if(err){
+            return res.status(400).json({
+                error:'Category could not load'
+            })
+        }
+        res.json(data)
+    })
+
+
+};
 exports.read = (req, res) => {};
 exports.update = (req, res) => {};
 exports.remove = (req, res) => {};
