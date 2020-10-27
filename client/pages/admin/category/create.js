@@ -100,7 +100,7 @@ const Create = ({user,token}) => {
         </label>
        
       </div>
-      <div className='btn btn-outline-warning'>{buttonText}</div>
+      <button className='btn btn-outline-warning'>{buttonText}</button>
     </form>
   );
   return (
