@@ -10,7 +10,7 @@ const Admin = ({ user }) => <Layout>
             <ul className='nav flex-column'>
                 <li className='nav-item'>
                         <Link href="/admin/category/create">
-                            <a className='nav-link'>Create Category</a>
+                            <a className='nav-link ' style={{color:'white',background:'orange',borderRadius:'10px',textAlign:'center'}}>Create Category</a>
                         </Link>
                 </li>
             </ul>
