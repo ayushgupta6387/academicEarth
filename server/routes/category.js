@@ -18,7 +18,8 @@ const {create,list,read,update,remove}= require('../controllers/category')
 
 router.post(
   "/category",
-  
+  categoryCreateValidator,
+  runValidation,
   requireSignin,
   adminMiddleware,
   create
