@@ -1,85 +1,102 @@
-import {useState, useEffect} from 'react';
-import Layout from '../components/layout';
-// import eyes from '../public/images/r1.jpg';
-import Router from 'next/router'
+import { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import Router from 'next/router';
 import axios from 'axios';
-import { showErrorMessage, showSuccessMessage } from '../helpers/alerts';
+import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
 import { API } from '../config';
-import { isAuth } from '../helpers/auth'
+import { isAuth } from '../helpers/auth';
 
 const Register = () => {
-
-    // using hooks
-    // array destructuring
     const [state, setState] = useState({
-        name: '',
-        email: '',
-        password: '',
-        // if two user try to register with same email then we will give error
+        name: 'Ryan',
+        email: 'ryan@gmail.com',
+        password: 'rrrrrr',
         error: '',
-        // after registering we will give success msg
         success: '',
-        // we will change dynamically button text
-        buttonText: 'Register Me'
-
+        buttonText: 'Register',
+        loadedCategories: [],
+        categories: []
     });
 
+    const { name, email, password, error, success, buttonText, loadedCategories, categories } = state;
 
-// by writing this useEffect-- if the user is logged in then whenever they try to open signin page it will redirect them to home page
     useEffect(() => {
         isAuth() && Router.push('/');
-    }, [])
+    }, []);
 
-    // now we use directly like buttonText in form where buttn created
-    const {name, email, password, error, success, buttonText} = state;
+    // load categories when component mounts using useEffect
+    useEffect(() => {
+        loadCategories();
+    }, []);
 
-// using function inside another function e is an event
-    const handleChange = (name) => (e) => {
-        setState({...state, [name]: e.target.value, error: '', success: '', buttonText: 'Register Me'})
+    const loadCategories = async () => {
+        const response = await axios.get(`${API}/categories`);
+        setState({ ...state, loadedCategories: response.data });
     };
 
+    const handleToggle = c => () => {
+        // return the first index or -1
+        const clickedCategory = categories.indexOf(c);
+        const all = [...categories];
+
+        if (clickedCategory === -1) {
+            all.push(c);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+        console.log('all >> categories', all);
+        setState({ ...state, categories: all, success: '', error: '' });
+    };
+
+    // show categories > checkbox
+    const showCategories = () => {
+        return (
+            loadedCategories &&
+            loadedCategories.map((c, i) => (
+                <li className="list-unstyled" key={c._id}>
+                    <input type="checkbox" onChange={handleToggle(c._id)} className="mr-2" />
+                    <label className="form-check-label">{c.name}</label>
+                </li>
+            ))
+        );
+    };
+
+    const handleChange = name => e => {
+        setState({ ...state, [name]: e.target.value, error: '', success: '', buttonText: 'Register' });
+    };
 
     const handleSubmit = async e => {
-
-        // to prevent reloading of page
         e.preventDefault();
-    
-        // this buttonText is shown when click on register me button
-        setState({...state, buttonText: 'Registering'})
-        try{
-            // console.table(name, email, password);
-            // passing data to below end point(in backend) with respective data (making a post request with axios)
-            // sending data from client side to backend
-            // http://localhost:8000/api replaced by ${API} not working
-            const response = await axios.post(`http://localhost:8000/api/register`, {
-                
+        console.table({
+            name,
+            email,
+            password,
+            categories
+        });
+        setState({ ...state, buttonText: 'Registering' });
+        try {
+            const response = await axios.post(`${API}/register`, {
                 name,
-                 email, 
-                 password
-                // after writing this we get data on server because in register(in controller we have written req.body)
+                email,
+                password,
+                categories
             });
             console.log(response);
             setState({
-                // after successfull submission all the fields needs to be empty 
                 ...state,
-                name:'',
-                email:'',
-                password:'',
-                buttonText:'Submitted',
-                // message is coming from controllers-->auth.js
-                success:response.data.message
+                name: '',
+                email: '',
+                password: '',
+                buttonText: 'Submitted',
+                success: response.data.message
             });
+        } catch (error) {
+            console.log(error);
+            setState({ ...state, buttonText: 'Register', error: error.response.data.error });
         }
-            catch (error){
-                    console.log(error);
-                    setState({...state, buttonText: 'Register', error: error.response.data.error});
-                }
-        }
-    
+    };
 
-
-// before applying async and await in handleSubmit
-// const handleSubmit = e => {
+    // const handleSubmit = e => {
     //     e.preventDefault();
     //     setState({ ...state, buttonText: 'Registering' });
     //     // console.table({ name, email, password });
@@ -106,86 +123,60 @@ const Register = () => {
     //         });
     // };
 
-
-// downloaded
-        // const handleSubmit = async e => {
-        //     e.preventDefault();
-        //     setState({ ...state, buttonText: 'Registering' });
-        //     try {
-        //         const response = await axios.post(`${API}/register`, {
-        //             name,
-        //             email,
-        //             password
-        //         });
-        //         console.log(response);
-        //         setState({
-        //             ...state,
-        //             name: '',
-        //             email: '',
-        //             password: '',
-        //             buttonText: 'Submitted',
-        //             success: response.data.message
-        //         });
-        //     } catch (error) {
-        //         console.log(error);
-        //         setState({ ...state, buttonText: 'Register', error: error.response.data.error });
-        //     }
-        // };    
-
-    const registerForm = () => 
-    <form className onSubmit = {handleSubmit}>
-
-        <div className="form-group">
-
-        <label className="label1" htmlFor="">UserName</label>
-        {/* by passing param. in ohandlehange func. we will know from where it is coming(from name or email...)  */}
-
-            <input onChange={handleChange('name')}  value={name} type="text" className="input form-control" placeholder="Type Your name" required/>
-        </div>
-
-        <div className="form-group">
-
-        <label className="label1" htmlFor="">E-mail</label>
-            <input onChange={handleChange('email')} value={email} type="email" className="input form-control" placeholder="Type Your email" required/>
-        </div>
-        
-        <div className="form-group">
-
-        <label className="label1" htmlFor="">Password</label>
-            <input onChange={handleChange('password')} value={password} type="password" className="input form-control" placeholder="Type Your password" required/>
-        </div>
-
-        <div className="form-group">
-          <button className="formbtn btn btn-outline-warning">{buttonText}</button>
-        </div>
-        <div className="form-group forgot">
-        <a href="">Forgot Password?</a>
-        </div>
-
-    </form>
-
-    return ( 
-    <Layout>
-    <div className="container">
-    <div className="row">
-    <div className="col-md-5 register-left">
-            <img src={"/images/r1.jpg"} alt="imageHere" />
-            <h3>Join Us</h3>
-            <h1>Academic Earth</h1>
-            <p>E-learning Platform</p>
-            <button type="button" className="btn btn-primary">About</button>
+    const registerForm = () => (
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <input
+                    value={name}
+                    onChange={handleChange('name')}
+                    type="text"
+                    className="form-control"
+                    placeholder="Type your name"
+                    required
+                />
             </div>
-        <div className="full col-md-7 register-right">
-            <h1>Register Here</h1>
-            <br />
-            {/* these below 2 lines to show alerts */}
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
-            {registerForm()}
-        </div>
-        </div>
-        </div>
-    </Layout>
+            <div className="form-group">
+                <input
+                    value={email}
+                    onChange={handleChange('email')}
+                    type="email"
+                    className="form-control"
+                    placeholder="Type your email"
+                    required
+                />
+            </div>
+            <div className="form-group">
+                <input
+                    value={password}
+                    onChange={handleChange('password')}
+                    type="password"
+                    className="form-control"
+                    placeholder="Type your password"
+                    required
+                />
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted ml-4">Category</label>
+                <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
+            </div>
+
+            <div className="form-group">
+                <button className="btn btn-outline-warning">{buttonText}</button>
+            </div>
+        </form>
+    );
+
+    return (
+        <Layout>
+            <div className="col-md-6 offset-md-3">
+                <h1>Register</h1>
+                <br />
+                {success && showSuccessMessage(success)}
+                {error && showErrorMessage(error)}
+                {registerForm()}
+            </div>
+        </Layout>
     );
 };
 
