@@ -38,6 +38,11 @@ const Head = () => (
             <a className="nav-link text-white" href="/">Home</a>
             </Link>
             </li>
+            <li className="nav-item">
+            <Link href="/user/link/create">
+            <a className="nav-link text-white btn btn-success"  style={{borderRadius: '0px'}} href="/">Submit a link</a>
+            </Link>
+            </li>
             
 
 {/* now show login register button if they are not logged in */}
