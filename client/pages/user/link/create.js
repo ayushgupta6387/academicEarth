@@ -56,6 +56,34 @@ const Create = () => {
         console.log('POST to server');
     };
 
+    const handleToggle = c => () => {
+        // return the first index or -1
+        const clickedCategory = categories.indexOf(c);
+        const all = [...categories];
+
+        if (clickedCategory === -1) {
+            all.push(c);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+        console.log('all >> categories', all);
+        setState({ ...state, categories: all, success: '', error: '' });
+    };
+
+    // show categories > checkbox
+    // this function will return a list
+    const showCategories = () => {
+        return (
+            loadedCategories &&
+            loadedCategories.map((c, i) => (
+                <li className="list-unstyled" key={c._id}>
+                    <input type="checkbox" onChange={handleToggle(c._id)} className="mr-2" />
+                    <label className="form-check-label">{c.name}</label>
+                </li>
+            ))
+        );
+    };
+
  // link create form
  const submitLinkForm = () => (
     <form onSubmit={handleSubmit}>
@@ -82,11 +110,16 @@ const Create = () => {
                 <div className="col-md-12">
                     <h1>Submit Link/URL</h1>
                     <br />
-                   
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-4">xxx</div>
+                <div className="col-md-4">
+                <div className="form-group">
+                        <label className="text ml-4">Category</label>
+                        <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
+                    </div>
+                </div>
+                
                 <div className="col-md-8">{submitLinkForm()}</div>
             </div>
             {JSON.stringify(title)}
