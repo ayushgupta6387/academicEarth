@@ -6,6 +6,68 @@ import { getCookie, isAuth } from '../../../helpers/auth';
 import { API } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
 
+const Create = ({ token }) => {
+    // state
+    const [state, setState] = useState({
+        title: '',
+        url: '',
+        categories: [],
+        loadedCategories: [],
+        success: '',
+        error: '',
+        type: '',
+        medium: ''
+    });
+
+    const { title, url, categories, loadedCategories, success, error, type, medium } = state;
+
+    // load categories when component mounts using useEffect
+    useEffect(() => {
+        loadCategories();
+    }, [success]);
+
+    const loadCategories = async () => {
+        const response = await axios.get(`${API}/categories`);
+        setState({ ...state, loadedCategories: response.data });
+    };
+
+    const handleTitleChange = e => {
+        setState({ ...state, title: e.target.value, error: '', success: '' });
+    };
+
+    const handleURLChange = e => {
+        setState({ ...state, url: e.target.value, error: '', success: '' });
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        // console.table({ title, url, categories, type, medium });
+        try {
+            const response = await axios.post(
+                `${API}/link`,
+                { title, url, categories, type, medium },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setState({
+                ...state,
+                title: '',
+                url: '',
+                success: 'Link is created',
+                error: '',
+                loadedCategories: [],
+                categories: [],
+                type: '',
+                medium: ''
+            });
+        } catch (error) {
+            console.log('LINK SUBMIT ERROR', error);
+            setState({ ...state, error: error.response.data.error });
+        }
+    };
 
     const handleTypeClick = e => {
         setState({ ...state, type: e.target.value, success: '', error: '' });
