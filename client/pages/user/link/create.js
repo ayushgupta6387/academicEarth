@@ -122,8 +122,8 @@ const Create = () => {
                 
                 <div className="col-md-8">{submitLinkForm()}</div>
             </div>
-            {JSON.stringify(title)}
-            {JSON.stringify(url)}
+            {JSON.stringify(categories)}
+         
         </Layout>
     );
 };
