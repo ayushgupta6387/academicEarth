@@ -1,9 +1,11 @@
 const User = require('../models/user');
+const Link = require('../models/link');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const { registerEmailParams } = require('../helpers/email');
+const { registerEmailParams, forgotPasswordEmailParams } = require('../helpers/email');
 const shortId = require('shortid');
+const _ = require('lodash');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -15,7 +17,7 @@ const ses = new AWS.SES({ apiVersion: '2010-12-01' });
 
 exports.register = (req, res) => {
     // console.log('REGISTER CONTROLLER', req.body);
-    const { name, email, password } = req.body;
+    const { name, email, password, categories } = req.body;
     // check if user exists in our db
     User.findOne({ email }).exec((err, user) => {
         if (user) {
@@ -24,7 +26,7 @@ exports.register = (req, res) => {
             });
         }
         // generate token with user name email and password
-        const token = jwt.sign({ name, email, password }, process.env.JWT_ACCOUNT_ACTIVATION, {
+        const token = jwt.sign({ name, email, password, categories }, process.env.JWT_ACCOUNT_ACTIVATION, {
             expiresIn: '10m'
         });
 
@@ -59,7 +61,7 @@ exports.registerActivate = (req, res) => {
             });
         }
 
-        const { name, email, password } = jwt.decode(token);
+        const { name, email, password, categories } = jwt.decode(token);
         const username = shortId.generate();
 
         User.findOne({ email }).exec((err, user) => {
@@ -70,7 +72,7 @@ exports.registerActivate = (req, res) => {
             }
 
             // register new user
-            const newUser = new User({ username, name, email, password });
+            const newUser = new User({ username, name, email, password, categories });
             newUser.save((err, result) => {
                 if (err) {
                     return res.status(401).json({
@@ -142,6 +144,104 @@ exports.adminMiddleware = (req, res, next) => {
         }
 
         req.profile = user;
+        next();
+    });
+};
+
+exports.forgotPassword = (req, res) => {
+    const { email } = req.body;
+    // check if user exists with that email
+    User.findOne({ email }).exec((err, user) => {
+        if (err || !user) {
+            return res.status(400).json({
+                error: 'User with that email does not exist'
+            });
+        }
+        // generate token and email to user
+        const token = jwt.sign({ name: user.name }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' });
+        // send email
+        const params = forgotPasswordEmailParams(email, token);
+
+        // populate the db > user > resetPasswordLink
+        return user.updateOne({ resetPasswordLink: token }, (err, success) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Password reset failed. Try later.'
+                });
+            }
+            const sendEmail = ses.sendEmail(params).promise();
+            sendEmail
+                .then(data => {
+                    console.log('ses reset pw success', data);
+                    return res.json({
+                        message: `Email has been sent to ${email}. Click on the link to reset your password`
+                    });
+                })
+                .catch(error => {
+                    console.log('ses reset pw failed', error);
+                    return res.json({
+                        message: `We could not vefiry your email. Try later.`
+                    });
+                });
+        });
+    });
+};
+
+exports.resetPassword = (req, res) => {
+    const { resetPasswordLink, newPassword } = req.body;
+    if (resetPasswordLink) {
+        // check for expiry
+        jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, (err, success) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Expired Link. Try again.'
+                });
+            }
+
+            User.findOne({ resetPasswordLink }).exec((err, user) => {
+                if (err || !user) {
+                    return res.status(400).json({
+                        error: 'Invalid token. Try again'
+                    });
+                }
+
+                const updatedFields = {
+                    password: newPassword,
+                    resetPasswordLink: ''
+                };
+
+                user = _.extend(user, updatedFields);
+
+                user.save((err, result) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: 'Password reset failed. Try again'
+                        });
+                    }
+
+                    res.json({
+                        message: `Great! Now you can login with your new password`
+                    });
+                });
+            });
+        });
+    }
+};
+
+exports.canUpdateDeleteLink = (req, res, next) => {
+    const { id } = req.params;
+    Link.findOne({ _id: id }).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Could not find link'
+            });
+        }
+        let authorizedUser = data.postedBy._id.toString() === req.user._id.toString();
+        if (!authorizedUser) {
+            return res.status(400).json({
+                error: 'You are not authorized'
+            });
+        }
         next();
     });
 };
