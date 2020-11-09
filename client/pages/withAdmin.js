@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API } from '../config';
 import { getCookie } from '../helpers/auth';
+import Create from './user/link/create';
 
 const withAdmin = Page => {
     const WithAdminUser = props => <Page {...props} />;
@@ -42,4 +43,4 @@ const withAdmin = Page => {
     return WithAdminUser;
 };
 
-export default withAdmin;
+export default withAdmin(Create);
