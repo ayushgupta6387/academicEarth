@@ -62,7 +62,8 @@ const Create = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("POST to server");
+      e.preventDefault();
+    console.table({title, url, categories, type, medium});
   };
 
   const handleTypeClick = (e) => {
@@ -226,8 +227,6 @@ const Create = () => {
 
         <div className="col-md-8">{submitLinkForm()}</div>
       </div>
-      {JSON.stringify(type)}
-      {JSON.stringify(medium)}
     </Layout>
   );
 };
