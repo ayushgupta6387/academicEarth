@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Layout from "../../../components/Layout";
 import axios from "axios";
+import {getCookie, isAuth} from '../../../helpers/auth'
 import { API } from "../../../config";
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 /*
@@ -19,7 +20,7 @@ return > show create forms, categories checkbox, radio buttons, success/error me
 get token of the logged in user - required to create link
  */
 
-const Create = () => {
+const Create = ({token}) => {
   // state
   const [state, setState] = useState({
     title: "",
@@ -61,10 +62,35 @@ const Create = () => {
     setState({ ...state, url: e.target.value, error: "", success: "" });
   };
 
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-    console.table({title, url, categories, type, medium});
-  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    // console.table({ title, url, categories, type, medium });
+    try {
+        const response = await axios.post(
+            `${API}/link`,
+            { title, url, categories, type, medium },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        setState({
+            ...state,
+            title: '',
+            url: '',
+            success: 'Link is created',
+            error: '',
+            loadedCategories: [],
+            categories: [],
+            type: '',
+            medium: ''
+        });
+    } catch (error) {
+        console.log('LINK SUBMIT ERROR', error);
+        setState({ ...state, error: error.response.data.error });
+    }
+};
 
   const handleTypeClick = (e) => {
     setState({ ...state, type: e.target.value, success: "", error: "" });
@@ -192,9 +218,9 @@ const Create = () => {
         />
       </div>
       <div>
-        <button className="btn btn-outline-warning" type="submit">
-          Submit
-        </button>
+      <button disabled={!token} className="btn btn-outline-warning" type="submit">
+                    {isAuth() || token ? 'Post' : 'Login to post'}
+                </button>
       </div>
     </form>
   );
@@ -229,6 +255,11 @@ const Create = () => {
       </div>
     </Layout>
   );
+};
+
+Create.getInitialProps = ({ req }) => {
+    const token = getCookie('token', req);
+    return { token };
 };
 
 export default Create;
