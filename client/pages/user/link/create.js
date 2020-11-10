@@ -251,7 +251,10 @@ const Create = ({token}) => {
           </div>
         </div>
 
-        <div className="col-md-8">{submitLinkForm()}</div>
+        <div className="col-md-8">
+        {success && showSuccessMessage(success)}
+                    {error && showErrorMessage(error)}
+        {submitLinkForm()}</div>
       </div>
     </Layout>
   );
