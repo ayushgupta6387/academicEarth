@@ -69,3 +69,19 @@ const Create = ({ user, token }) => {
                     }
                 }
             );
+            console.log('CATEGORY CREATE RESPONSE', response);
+            setImageUploadButtonName('Upload image');
+            setState({
+                ...state,
+                name: '',
+                content: '',
+                formData: '',
+                buttonText: 'Created',
+                imageUploadText: 'Upload image',
+                success: `${response.data.name} is created`
+            });
+        } catch (error) {
+            console.log('CATEGORY CREATE ERROR', error);
+            setState({ ...state, buttonText: 'Create', error: error.response.data.error });
+        }
+    };
