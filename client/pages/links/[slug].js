@@ -17,6 +17,10 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         loadUpdatedLinks();
     };
 
+    const loadUpdatedLinks = async () => {
+        const response = await axios.post(`${API}/category/${query.slug}`);
+        setAllLinks(response.data.links);
+    };
 
     const listOfLinks = () =>
         allLinks.map((l, i) => (
