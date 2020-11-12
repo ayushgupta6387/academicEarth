@@ -101,7 +101,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                         pageStart={0}
                         loadMore={loadMore}
                         hasMore={size > 0 && size >= limit}
-                        loader={<img src="/static/images/loading.gif" alt="loading" />}
+                        loader={<img src="/images/loading.gif" alt="loading" />}
                     ></InfiniteScroll>
                 </div>
             </div>
