@@ -46,3 +46,17 @@ const Read = ({ user, token }) => {
                 </a>
             </Link>
         ));
+
+    return (
+        <Layout>
+            <div className="row">
+                <div className="col">
+                    <h1>List of categories</h1>
+                    <br />
+                </div>
+            </div>
+
+            <div className="row">{listCategories()}</div>
+        </Layout>
+    );
+};
