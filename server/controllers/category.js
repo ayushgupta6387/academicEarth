@@ -138,7 +138,19 @@ exports.create = (req, res) => {
             return res.status(400).json({
                 error: 'Could not load category'
             });
-        }
+        } Link.find({ categories: category })
+                .populate('postedBy', '_id name username')
+                .populate('categories', 'name')
+                .sort({ createdAt: -1 })
+                .limit(limit)
+                .skip(skip)
+                .exec((err, links) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: 'Could not load links of a category'
+                        });
+                    }
+                    res.json({ category, links });
     //save to db
 
     category.save((err, success) => {
@@ -159,6 +171,19 @@ exports.list = (req, res) => {
     res.json(data);
   });
 };
+Link.find({ categories: category })
+.populate('postedBy', '_id name username')
+.populate('categories', 'name')
+.sort({ createdAt: -1 })
+.limit(limit)
+.skip(skip)
+.exec((err, links) => {
+    if (err) {
+        return res.status(400).json({
+            error: 'Could not load links of a category'
+        });
+    }
+    res.json({ category, links });
 exports.read = (req, res) => {
   const { slug } = req.params;
   let limit = req.body.limit ? parseInt(req.body.limit) : 10;
