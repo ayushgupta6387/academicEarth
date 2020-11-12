@@ -85,3 +85,32 @@ const Create = ({ user, token }) => {
             setState({ ...state, buttonText: 'Create', error: error.response.data.error });
         }
     };
+
+    const createCategoryForm = () => (
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label className="text-muted">Name</label>
+                <input onChange={handleChange('name')} value={name} type="text" className="form-control" required />
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Content</label>
+                <ReactQuill
+                    value={content}
+                    onChange={handleContent}
+                    placeholder="Write something..."
+                    theme="bubble"
+                    className="pb-5 mb-3"
+                    style={{ border: '1px solid #666' }}
+                />
+            </div>
+            <div className="form-group">
+                <label className="btn btn-outline-secondary">
+                    {imageUploadButtonName}
+                    <input onChange={handleImage} type="file" accept="image/*" className="form-control" hidden />
+                </label>
+            </div>
+            <div>
+                <button className="btn btn-outline-warning">{buttonText}</button>
+            </div>
+        </form>
+    );
