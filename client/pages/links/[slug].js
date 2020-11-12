@@ -12,7 +12,6 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
 
-    
 
     const loadUpdatedLinks = async () => {
         const response = await axios.post(`${API}/category/${query.slug}`);
