@@ -46,7 +46,9 @@ const Read = ({ user, token }) => {
                                 <h3>{c.name}</h3>
                             </div>
                             <div className="col-md-3">
-                               
+                                <Link href={`/admin/category/${c.slug}`}>
+                                    <button className="btn btn-sm btn-outline-success btn-block mb-1">Update</button>
+                                </Link>
 
                                 <button
                                     onClick={() => confirmDelete(c.slug)}
