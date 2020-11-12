@@ -72,6 +72,18 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     //         )
     //     );
     // };
+      // const loadMoreButton = () => {
+    //     return (
+    //         size > 0 &&
+    //         size >= limit && (
+    //             <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+    //                 Load more
+    //             </button>
+    //         )
+    //     );
+    // };
+
+    
 
     return (
         <Layout>
