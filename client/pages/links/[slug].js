@@ -48,6 +48,17 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             setSkip(toSkip);
         };
 
+        const loadMoreButton2 = () => {
+            return (
+                size > 0 &&
+                size >= limit && (
+                    <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+                        Load more
+                    </button>
+                )
+            );
+        };
+
     return (
         <Layout>
             <div className="row">
