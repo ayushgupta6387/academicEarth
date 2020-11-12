@@ -158,4 +158,9 @@ Category.findOneAndRemove({ slug }).exec((err, data) => {
       return res.status(400).json({
           error: 'Could not delete category'
       });
+
+      const deleteParams = {
+        Bucket: 'hackr-kaloraat',
+        Key: `category/${data.image.key}`
+    };
   }
