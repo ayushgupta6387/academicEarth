@@ -129,3 +129,5 @@ const Create = ({ user, token }) => {
         </Layout>
     );
 };
+
+export default withAdmin(Create);
