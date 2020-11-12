@@ -169,8 +169,6 @@ exports.forgotPassword = (req, res) => {
                 });
             }
             const sendEmail = ses.sendEmail(params).promise();
-
-            console.log('email sending')
             sendEmail
                 .then(data => {
                     console.log('ses reset pw success', data);
