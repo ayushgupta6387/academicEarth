@@ -85,15 +85,4 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 };
 
 
-    const response = await axios.post(`${API}/category/${query.slug}`, { skip, limit });
-    return {
-        query,
-        category: response.data.category,
-        links: response.data.links,
-        totalLinks: response.data.links.length,
-        linksLimit: limit,
-        linkSkip: skip
-    };
-};
-
 export default Links;
