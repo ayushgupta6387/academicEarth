@@ -15,7 +15,9 @@ const Read = ({ user, token }) => {
 
     const { error, success, categories } = state;
 
-    
+    useEffect(() => {
+        loadCategories();
+    }, []);
 
     const loadCategories = async () => {
         const response = await axios.get(`${API}/categories`);
