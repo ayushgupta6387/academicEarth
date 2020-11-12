@@ -95,6 +95,14 @@ exports.create = (req, res) => {
   const slug = slugify(name);
   let category = new Category({ name, content, slug });
 
+   // image data
+   const base64Data = new Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+   const type = image.split(';')[0].split('/')[1];
+
+   const slug = slugify(name);
+   let category = new Category({ name, content, slug });
+
+
   const params = {
     Bucket: "cloud9project",
     Key: `category/${uuidv4()}.${type}`,
