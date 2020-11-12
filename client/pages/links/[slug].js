@@ -12,6 +12,12 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
 
+    const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
+        const [allLinks, setAllLinks] = useState(links);
+        const [limit, setLimit] = useState(linksLimit);
+        const [skip, setSkip] = useState(0);
+        const [size, setSize] = useState(totalLinks);
+
     const listOfLinks = () =>
         allLinks.map((l, i) => (
             <div className="row alert alert-primary p-2">
