@@ -114,3 +114,18 @@ const Create = ({ user, token }) => {
             </div>
         </form>
     );
+
+    return (
+        <Layout>
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <h1>Create category</h1>
+                    <br />
+                    {success && showSuccessMessage(success)}
+                    {error && showErrorMessage(error)}
+                    {createCategoryForm()}
+                </div>
+            </div>
+        </Layout>
+    );
+};
