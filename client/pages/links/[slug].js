@@ -3,16 +3,14 @@ import Layout from '../../components/Layout';
 import Link from 'next/link';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
-import { API } from '../../config';
 import moment from 'moment';
+import { API } from '../../config';
 
-
-
-    const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
-        const [allLinks, setAllLinks] = useState(links);
-        const [limit, setLimit] = useState(linksLimit);
-        const [skip, setSkip] = useState(0);
-        const [size, setSize] = useState(totalLinks);
+const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
+    const [allLinks, setAllLinks] = useState(links);
+    const [limit, setLimit] = useState(linksLimit);
+    const [skip, setSkip] = useState(0);
+    const [size, setSize] = useState(totalLinks);
 
     const listOfLinks = () =>
         allLinks.map((l, i) => (
@@ -41,33 +39,32 @@ import moment from 'moment';
             </div>
         ));
 
-        const loadMore = async () => {
-            let toSkip = skip + limit;
-            const response = await axios.post(`${API}/category/${query.slug}`, { skip: toSkip, limit });
-            setAllLinks([...allLinks, ...response.data.links]);
-            console.log('allLinks', allLinks);
-            console.log('response.data.links.length', response.data.links.length);
-            setSize(response.data.links.length);
-            setSkip(toSkip);
-        };
+    const loadMore = async () => {
+        let toSkip = skip + limit;
+        const response = await axios.post(`${API}/category/${query.slug}`, { skip: toSkip, limit });
+        setAllLinks([...allLinks, ...response.data.links]);
+        console.log('allLinks', allLinks);
+        console.log('response.data.links.length', response.data.links.length);
+        setSize(response.data.links.length);
+        setSkip(toSkip);
+    };
 
- 
-        const loadMoreButton = () => {
-            return (
-                size > 0 &&
-                size >= limit && (
-                    <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
-                        Load more
-                    </button>
-                )
-            );
-        };
-        
+    const loadMoreButton = () => {
+        return (
+            size > 0 &&
+            size >= limit && (
+                <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+                    Load more
+                </button>
+            )
+        );
+    };
+
     return (
         <Layout>
             <div className="row">
                 <div className="col-md-8">
-                <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
+                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4">
@@ -83,7 +80,7 @@ import moment from 'moment';
                 </div>
             </div>
 
-            <p>load more button</p>
+            <div className="text-center pt-4 pb-5">{loadMoreButton()}</div>
         </Layout>
     );
 };
