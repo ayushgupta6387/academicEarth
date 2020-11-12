@@ -3,8 +3,8 @@ import Layout from '../../components/Layout';
 import Link from 'next/link';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
-import { API } from '../../config';
 import moment from 'moment';
+import { API } from '../../config';
 
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
     const [allLinks, setAllLinks] = useState(links);
@@ -38,6 +38,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 </div>
             </div>
         ));
+
     return (
         <Layout>
             <div className="row">
