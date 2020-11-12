@@ -6,8 +6,13 @@ import renderHTML from 'react-render-html';
 import { API } from '../../config';
 import moment from 'moment';
 
-const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
-    const [allLinks, setAllLinks] = useState(links);
+
+
+    const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
+        const [allLinks, setAllLinks] = useState(links);
+        const [limit, setLimit] = useState(linksLimit);
+        const [skip, setSkip] = useState(0);
+        const [size, setSize] = useState(totalLinks);
 
     const listOfLinks = () =>
         allLinks.map((l, i) => (
