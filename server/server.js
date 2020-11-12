@@ -31,11 +31,3 @@ app.use(bodyParser.json({ limit: '5mb', type: 'application/json' }));
 // app.use(cors());
 app.use(cors({ origin: process.env.CLIENT_URL }));
 
-// middlewares
-app.use('/api', authRoutes);
-app.use('/api', userRoutes);
-app.use('/api', categoryRoutes);
-app.use('/api', linkRoutes);
-
-const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`API is running on port ${port}`));
