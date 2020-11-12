@@ -84,9 +84,6 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     );
 };
 
-Links.getInitialProps = async ({ query, req }) => {
-    let skip = 0;
-    let limit = 2;
 
     const response = await axios.post(`${API}/category/${query.slug}`, { skip, limit });
     return {
