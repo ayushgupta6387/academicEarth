@@ -18,11 +18,6 @@ mongoose
     .then(() => console.log('DB connected'))
     .catch(err => console.log(err));
 
-// import routes
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const categoryRoutes = require('./routes/category');
-const linkRoutes = require('./routes/link');
 
 // app middlewares
 app.use(morgan('dev'));
