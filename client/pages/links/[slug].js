@@ -97,6 +97,17 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
             {/*<div className="text-center pt-4 pb-5">{loadMoreButton()}</div>*/}
 
+            // const loadMoreButton = () => {
+    //     return (
+    //         size > 0 &&
+    //         size >= limit && (
+    //             <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+    //                 Load more
+    //             </button>
+    //         )
+    //     );
+    // };
+
             <InfiniteScroll
                 pageStart={0}
                 loadMore={loadMore}
