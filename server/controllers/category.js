@@ -168,4 +168,7 @@ Category.findOneAndRemove({ slug }).exec((err, data) => {
       if (err) console.log('S3 DELETE ERROR DUING', err);
       else console.log('S3 DELETED DURING', data); // deleted
   });
+  res.json({
+    message: 'Category deleted successfully'
+});
   }
