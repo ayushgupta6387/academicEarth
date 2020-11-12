@@ -131,7 +131,14 @@ exports.create = (req, res) => {
 
     //postedby
     category.postedBy = req.user._id;
-
+    Category.findOne({ slug })
+    .populate('postedBy', '_id name username')
+    .exec((err, category) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Could not load category'
+            });
+        }
     //save to db
 
     category.save((err, success) => {
