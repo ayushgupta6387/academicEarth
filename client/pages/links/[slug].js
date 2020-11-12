@@ -97,8 +97,6 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
             {/*<div className="text-center pt-4 pb-5">{loadMoreButton()}</div>*/}
 
-            
-
             <InfiniteScroll
                 pageStart={0}
                 loadMore={loadMore}
