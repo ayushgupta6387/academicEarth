@@ -163,4 +163,9 @@ Category.findOneAndRemove({ slug }).exec((err, data) => {
         Bucket: 'hackr-kaloraat',
         Key: `category/${data.image.key}`
     };
+
+    s3.deleteObject(deleteParams, function(err, data) {
+      if (err) console.log('S3 DELETE ERROR DUING', err);
+      else console.log('S3 DELETED DURING', data); // deleted
+  });
   }
