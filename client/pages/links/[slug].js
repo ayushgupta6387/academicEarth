@@ -12,6 +12,10 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
 
+    const handleClick = async linkId => {
+        const response = await axios.put(`${API}/click-count`, { linkId });
+        loadUpdatedLinks();
+    };
 
     const loadUpdatedLinks = async () => {
         const response = await axios.post(`${API}/category/${query.slug}`);
@@ -57,7 +61,16 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         setSkip(toSkip);
     };
 
-   
+    const loadMoreButton = () => {
+        return (
+            size > 0 &&
+            size >= limit && (
+                <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+                    Load more
+                </button>
+            )
+        );
+    };
 
     return (
         <Layout>
@@ -83,6 +96,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         </Layout>
     );
 };
+
 
 
 export default Links;
