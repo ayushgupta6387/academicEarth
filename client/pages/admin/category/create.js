@@ -54,3 +54,18 @@ const Create = ({ user, token }) => {
             );
         }
     };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        setState({ ...state, buttonText: 'Creating' });
+        console.table({ name, content, image });
+        try {
+            const response = await axios.post(
+                `${API}/category`,
+                { name, content, image },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
