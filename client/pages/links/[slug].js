@@ -49,6 +49,15 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <img src={category.image.url} alt={category.name} style={{ width: 'auto', maxHeight: '200px' }} />
                 </div>
             </div>
+            allLinks.map((l, i) => (
+            <div className="row alert alert-primary p-2">
+                <div className="col-md-8">
+                    <a href={l.url} target="_blank">
+                        <h5 className="pt-2">{l.title}</h5>
+                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
+                            {l.url}
+                        </h6>
+                    </a>
             <br />
             <div className="row">
                 <div className="col-md-8">{listOfLinks()}</div>
