@@ -109,3 +109,25 @@ Links.getInitialProps = async ({ query, req }) => {
 };
 
 export default Links;
+
+<Layout>
+            <div className="row">
+                <div className="col-md-8">
+                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
+                    <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
+                </div>
+                <div className="col-md-4">
+                    <img src={category.image.url} alt={category.name} style={{ width: 'auto', maxHeight: '200px' }} />
+                </div>
+            </div>
+            <br />
+            <div className="row">
+                <div className="col-md-8">{listOfLinks()}</div>
+                <div className="col-md-4">
+                    <h2 className="lead">Most popular in {category.name}</h2>
+                    <p>show popular links</p>
+                </div>
+            </div>
+
+            <div className="text-center pt-4 pb-5">{loadMoreButton()}</div>
+        </Layout>
