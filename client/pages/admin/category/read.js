@@ -22,7 +22,9 @@ const Read = ({ user, token }) => {
         setState({ ...state, categories: response.data });
     };
 
-    
+    const confirmDelete = slug => {
+        console.log('delete > ', slug);
+    };
 
     const listCategories = () =>
         categories.map((c, i) => (
