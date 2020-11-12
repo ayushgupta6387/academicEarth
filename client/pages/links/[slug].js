@@ -67,14 +67,6 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
-                <div className="col-md-8">
-                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
-                    <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
-                </div>
-                <div className="col-md-8">
-                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
-                    <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
-                </div>
                 <div className="col-md-4">
                     <img src={category.image.url} alt={category.name} style={{ width: 'auto', maxHeight: '200px' }} />
                 </div>
