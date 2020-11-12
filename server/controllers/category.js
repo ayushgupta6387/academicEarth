@@ -101,6 +101,7 @@ exports.create = (req, res) => {
 
    const slug = slugify(name);
    let category = new Category({ name, content, slug });
+   return res.json(success);
 
 
   const params = {
