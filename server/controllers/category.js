@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     let category = new Category({ name, content, slug });
 
     const params = {
-        Bucket: 'hackr-kaloraat',
+        Bucket: 'cloud9project',
         Key: `category/${uuidv4()}.${type}`,
         Body: base64Data,
         ACL: 'public-read',
@@ -110,7 +110,7 @@ exports.update = (req, res) => {
         if (image) {
             // remove the existing image from s3 before uploading new/updated one
             const deleteParams = {
-                Bucket: 'hackr-kaloraat',
+                Bucket: 'cloud9project',
                 Key: `category/${updated.image.key}`
             };
 
@@ -121,7 +121,7 @@ exports.update = (req, res) => {
 
             // handle upload image
             const params = {
-                Bucket: 'hackr-kaloraat',
+                Bucket: 'cloud9project',
                 Key: `category/${uuidv4()}.${type}`,
                 Body: base64Data,
                 ACL: 'public-read',
@@ -153,6 +153,9 @@ exports.update = (req, res) => {
     });
 };
 
-exports.remove = (req, res) => {
-    //
-};
+Category.findOneAndRemove({ slug }).exec((err, data) => {
+  if (err) {
+      return res.status(400).json({
+          error: 'Could not delete category'
+      });
+  }
