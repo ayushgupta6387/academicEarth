@@ -12,10 +12,12 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
 
+    
+
     const listOfLinks = () =>
         allLinks.map((l, i) => (
             <div className="row alert alert-primary p-2">
-                <div className="col-md-8">
+                <div className="col-md-8" onClick={e => handleClick(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
                         <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
@@ -27,6 +29,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <span className="pull-right">
                         {moment(l.createdAt).fromNow()} by {l.postedBy.name}
                     </span>
+                    <br />
+                    <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
                 </div>
                 <div className="col-md-12">
                     <span className="badge text-dark">
