@@ -13,6 +13,11 @@ const Admin = ({ user }) => <Layout>
                             <a className='nav-link ' style={{color:'white',background:'orange',borderRadius:'10px',textAlign:'center'}}>Create Category</a>
                         </Link>
                 </li>
+                <li className='nav-item'>
+                        <Link href="/admin/category/read">
+                            <a className='nav-link ' style={{color:'white',background:'orange',borderRadius:'10px',textAlign:'center'}}>All Categories</a>
+                        </Link>
+                </li>
             </ul>
 
         </div>
