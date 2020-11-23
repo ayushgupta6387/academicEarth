@@ -18,6 +18,11 @@ const Admin = ({ user }) => <Layout>
                             <a className='nav-link ' style={{color:'white',background:'orange',borderRadius:'10px',textAlign:'center'}}>All Categories</a>
                         </Link>
                 </li>
+                <li className='nav-item'>
+                        <Link href="/admin/link/read">
+                            <a className='nav-link ' style={{color:'white',background:'orange',borderRadius:'10px',textAlign:'center'}}>All Links</a>
+                        </Link>
+                </li>
             </ul>
 
         </div>
