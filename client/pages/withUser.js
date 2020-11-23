@@ -8,6 +8,7 @@ const withUser = Page => {
         const token = getCookie('token', context.req);
         // initially user data is null then we get from backend
         let user = null;
+        let userLinks=[]
 
         if (token) {
             try {
@@ -17,7 +18,9 @@ const withUser = Page => {
                         contentType: 'application/json'
                     }
                 });
-                user = response.data;
+                console.log("response in withUser",response)
+                user = response.data.user;
+                userLinks = response.data.links;
             } catch (error) {
                 if (error.response.status === 401) {
                     user = null;
@@ -35,7 +38,8 @@ const withUser = Page => {
             return {
                 ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),
                 user,
-                token
+                token,
+                userLinks
             };
         }
     };
