@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
+const Link = require('../models/link');
 const expressJwt = require('express-jwt');
 const { registerEmailParams, forgotPasswordEmailParams } = require('../helpers/email');
 const shortId = require('shortid');
@@ -228,3 +229,29 @@ exports.resetPassword = (req, res) => {
         });
     }
 };
+
+
+exports.canUpdateDeleteLink = (req, res, next) => {
+    const { id } = req.params;
+    Link.findOne({ _id: id }).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Could not find link'
+            });
+        }
+        let authorizedUser = data.postedBy._id.toString() === req.user._id.toString();
+        if (!authorizedUser) {
+            return res.status(400).json({
+                error: 'You are not authorized'
+            });
+        }
+        next();
+    });
+};
+
+
+
+
+
+
+
