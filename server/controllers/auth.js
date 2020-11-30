@@ -61,15 +61,7 @@ exports.registerActivate = (req, res) => {
             });
         }
 
-        const { name, email, password, categories } = jwt.decode(token);
-        const username = shortId.generate();
-
-        User.findOne({ email }).exec((err, user) => {
-            if (user) {
-                return res.status(401).json({
-                    error: 'Email is taken'
-                });
-            }
+       
 
             // register new user
             const newUser = new User({ username, name, email, password, categories });
