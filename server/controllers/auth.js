@@ -1,7 +1,7 @@
 const User = require('../models/user');
+const Link = require('../models/link');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
-const Link = require('../models/link');
 const expressJwt = require('express-jwt');
 const { registerEmailParams, forgotPasswordEmailParams } = require('../helpers/email');
 const shortId = require('shortid');
@@ -17,7 +17,7 @@ const ses = new AWS.SES({ apiVersion: '2010-12-01' });
 
 exports.register = (req, res) => {
     // console.log('REGISTER CONTROLLER', req.body);
-    const { name, email, password } = req.body;
+    const { name, email, password, categories } = req.body;
     // check if user exists in our db
     User.findOne({ email }).exec((err, user) => {
         if (user) {
@@ -26,7 +26,7 @@ exports.register = (req, res) => {
             });
         }
         // generate token with user name email and password
-        const token = jwt.sign({ name, email, password }, process.env.JWT_ACCOUNT_ACTIVATION, {
+        const token = jwt.sign({ name, email, password, categories }, process.env.JWT_ACCOUNT_ACTIVATION, {
             expiresIn: '10m'
         });
 
@@ -61,7 +61,7 @@ exports.registerActivate = (req, res) => {
             });
         }
 
-        const { name, email, password } = jwt.decode(token);
+        const { name, email, password, categories } = jwt.decode(token);
         const username = shortId.generate();
 
         User.findOne({ email }).exec((err, user) => {
@@ -72,7 +72,7 @@ exports.registerActivate = (req, res) => {
             }
 
             // register new user
-            const newUser = new User({ username, name, email, password });
+            const newUser = new User({ username, name, email, password, categories });
             newUser.save((err, result) => {
                 if (err) {
                     return res.status(401).json({
@@ -170,8 +170,6 @@ exports.forgotPassword = (req, res) => {
                 });
             }
             const sendEmail = ses.sendEmail(params).promise();
-
-            console.log('email sending')
             sendEmail
                 .then(data => {
                     console.log('ses reset pw success', data);
@@ -230,7 +228,6 @@ exports.resetPassword = (req, res) => {
     }
 };
 
-
 exports.canUpdateDeleteLink = (req, res, next) => {
     const { id } = req.params;
     Link.findOne({ _id: id }).exec((err, data) => {
@@ -248,10 +245,3 @@ exports.canUpdateDeleteLink = (req, res, next) => {
         next();
     });
 };
-
-
-
-
-
-
-
