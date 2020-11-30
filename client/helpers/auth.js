@@ -2,13 +2,7 @@ import cookie from 'js-cookie';
 import Router from 'next/router';
 
 // set in cookie
-export const setCookie = (key, value) => {
-    if (process.browser) {
-        cookie.set(key, value, {
-            expires: 1
-        });
-    }
-};
+
 
 // remove from cookie
 export const removeCookie = key => {
