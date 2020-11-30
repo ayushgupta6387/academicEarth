@@ -35,19 +35,7 @@ exports.register = (req, res) => {
 
         const sendEmailOnRegister = ses.sendEmail(params).promise();
 
-        sendEmailOnRegister
-            .then(data => {
-                console.log('email submitted to SES', data);
-                res.json({
-                    message: `Email has been sent to ${email}, Follow the instructions to complete your registration`
-                });
-            })
-            .catch(error => {
-                console.log('ses email on register', error);
-                res.json({
-                    message: `We could not verify your email. Please try again`
-                });
-            });
+        
     });
 };
 
