@@ -20,7 +20,10 @@ exports.register = (req, res) => {
     const { name, email, password, categories } = req.body;
     // check if user exists in our db
     User.findOne({ email }).exec((err, user) => {
-      
+        if (user) {
+            return res.status(400).json({
+                error: 'Email is taken'
+            });
         }
         // generate token with user name email and password
         const token = jwt.sign({ name, email, password, categories }, process.env.JWT_ACCOUNT_ACTIVATION, {
