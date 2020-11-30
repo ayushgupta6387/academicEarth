@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
         <ul className="nav nav-tabs bg-dark">
             <li className="nav-item">
                 <Link href="/">
-                    <a className="nav-link text-dark">Home</a>
+                    <a className="nav-link text-white">Home</a>
                 </Link>
             </li>
 
@@ -42,12 +42,12 @@ const Layout = ({ children }) => {
                 <React.Fragment>
                     <li className="nav-item">
                         <Link href="/login">
-                            <a className="nav-link text-dark">Login</a>
+                            <a className="nav-link text-white">Login</a>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/register">
-                            <a className="nav-link text-dark">Register</a>
+                            <a className="nav-link text-white">Register</a>
                         </Link>
                     </li>
                 </React.Fragment>
@@ -56,7 +56,7 @@ const Layout = ({ children }) => {
             {isAuth() && isAuth().role === 'admin' && (
                 <li className="nav-item ml-auto">
                     <Link href="/admin">
-                        <a className="nav-link text-dark">{isAuth().name}</a>
+                        <a className="nav-link text-white">{isAuth().name}</a>
                     </Link>
                 </li>
             )}
@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
             {isAuth() && isAuth().role === 'subscriber' && (
                 <li className="nav-item ml-auto">
                     <Link href="/user">
-                        <a className="nav-link text-dark">{isAuth().name}</a>
+                        <a className="nav-link text-white">{isAuth().name}</a>
                     </Link>
                 </li>
             )}
