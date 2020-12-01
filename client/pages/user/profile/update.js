@@ -132,7 +132,7 @@ const Profile = ({ user, token }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted ml-4">Category</label>
+                <label className="text-light ml-4">Category</label>
                 <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
             </div>
 
