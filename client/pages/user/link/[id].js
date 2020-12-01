@@ -177,15 +177,15 @@ const Update = ({ oldLink, token }) => {
     const submitLinkForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Title</label>
+                <label className="text-light">Title</label>
                 <input type="text" className="form-control" onChange={handleTitleChange} value={title} />
             </div>
             <div className="form-group">
-                <label className="text-muted">URL</label>
+                <label className="text-light">URL</label>
                 <input type="url" className="form-control" onChange={handleURLChange} value={url} />
             </div>
             <div>
-                <button disabled={!token} className="btn btn-outline-warning" type="submit">
+                <button disabled={!token} className="btn btn-outline-dark" type="submit">
                     {isAuth() || token ? 'Update' : 'Login to update'}
                 </button>
             </div>
@@ -203,15 +203,15 @@ const Update = ({ oldLink, token }) => {
             <div className="row">
                 <div className="col-md-4">
                     <div className="form-group">
-                        <label className="text-muted ml-4">Category</label>
+                        <label className="text-light ml-4">Category</label>
                         <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div className="form-group">
-                        <label className="text-muted ml-4">Type</label>
+                        <label className="text-light ml-4">Type</label>
                         {showTypes()}
                     </div>
                     <div className="form-group">
-                        <label className="text-muted ml-4">Medium</label>
+                        <label className="text-light ml-4">Medium</label>
                         {showMedium()}
                     </div>
                 </div>
