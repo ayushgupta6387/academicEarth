@@ -50,7 +50,7 @@ const Read = ({ user, token }) => {
     const listCategories = () =>
         categories.map((c, i) => (
             <Link key={i} href={`/links/${c.slug}`}>
-                <a style={{ border: '1px solid red' }} className="bg-light p-3 col-md-6">
+                <a style={{ borderRadius:'5px',textDecoration:'none' }} className="bg-white p-3 col-md-5 m-2 ">
                     <div>
                         <div className="row">
                             <div className="col-md-3">
@@ -61,7 +61,7 @@ const Read = ({ user, token }) => {
                                     className="pr-3"
                                 />
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 align-self-center">
                                 <h3>{c.name}</h3>
                             </div>
                             <div className="col-md-3">
