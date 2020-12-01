@@ -58,7 +58,7 @@ const Home = ({ categories }) => {
     const listCategories = () =>
         categories.map((c, i) => (
             <Link key={i} href={`/links/${c.slug}`}>
-                <a style={{ borderRadius:'5px' }} className="bg-light p-3 col-md-3 m-1">
+                <a style={{ borderRadius:'5px' ,textDecoration:'none' }} className="bg-light p-3 col-md-3 m-1">
                     <div>
                         <div className="row">
                             <div className="col-md-4">
@@ -69,7 +69,7 @@ const Home = ({ categories }) => {
                                     className="pr-3"
                                 />
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-md-8 align-self-center text-center">
                                 <h3>{c.name}</h3>
                             </div>
                         </div>
