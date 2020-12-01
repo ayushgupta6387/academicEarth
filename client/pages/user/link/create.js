@@ -172,11 +172,11 @@ const Create = ({ token }) => {
     const submitLinkForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Title</label>
+                <label className="text-dark">Title</label>
                 <input type="text" className="form-control" onChange={handleTitleChange} value={title} />
             </div>
             <div className="form-group">
-                <label className="text-muted">URL</label>
+                <label className="text-dark">URL</label>
                 <input type="url" className="form-control" onChange={handleURLChange} value={url} />
             </div>
             <div>
@@ -198,15 +198,15 @@ const Create = ({ token }) => {
             <div className="row">
                 <div className="col-md-4">
                     <div className="form-group">
-                        <label className="text-muted ml-4">Category</label>
+                        <label className="text-dark ml-4">Category</label>
                         <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div className="form-group">
-                        <label className="text-muted ml-4">Type</label>
+                        <label className="text-dark ml-4">Type</label>
                         {showTypes()}
                     </div>
                     <div className="form-group">
-                        <label className="text-muted ml-4">Medium</label>
+                        <label className="text-dark ml-4">Medium</label>
                         {showMedium()}
                     </div>
                 </div>
