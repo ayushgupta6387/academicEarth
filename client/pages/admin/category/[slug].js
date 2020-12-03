@@ -86,22 +86,22 @@ const Update = ({ oldCategory, token }) => {
     const updateCategoryForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text-light">Name</label>
                 <input onChange={handleChange('name')} value={name} type="text" className="form-control" required />
             </div>
             <div className="form-group">
-                <label className="text-muted">Content</label>
+                <label className="text-light">Content</label>
                 <ReactQuill
                     value={content}
                     onChange={handleContent}
                     placeholder="Write something..."
                     theme="bubble"
                     className="pb-5 mb-3"
-                    style={{ border: '1px solid #666' }}
+                    style={{ border: '1px solid #666' ,backgroundColor:'white'}}
                 />
             </div>
             <div className="form-group">
-                <label className="btn btn-outline-secondary">
+                <label className="btn btn-outline-light">
                     {imageUploadButtonName}{' '}
                     <span>
                         <img src={imagePreview} alt="image" height="20" />

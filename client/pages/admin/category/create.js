@@ -89,28 +89,28 @@ const Create = ({ user, token }) => {
     const createCategoryForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text-white">Name</label>
                 <input onChange={handleChange('name')} value={name} type="text" className="form-control" required />
             </div>
             <div className="form-group">
-                <label className="text-muted">Content</label>
+                <label className="text-white">Content</label>
                 <ReactQuill
                     value={content}
                     onChange={handleContent}
                     placeholder="Write something..."
                     theme="bubble"
                     className="pb-5 mb-3"
-                    style={{ border: '1px solid #666' }}
+                    style={{ border: '1px solid #666' ,backgroundColor:'white',borderRadius:'2px' }}
                 />
             </div>
             <div className="form-group">
-                <label className="btn btn-outline-secondary">
+                <label className="btn btn-outline-light">
                     {imageUploadButtonName}
                     <input onChange={handleImage} type="file" accept="image/*" className="form-control" hidden />
                 </label>
             </div>
             <div>
-                <button className="btn btn-outline-warning">{buttonText}</button>
+                <button className="btn btn-dark">{buttonText}</button>
             </div>
         </form>
     );
