@@ -11,9 +11,9 @@ exports.userRegisterValidator = [
     check('password')
         .isLength({ min: 6 })
         .withMessage('Password must be at least 6 characters long'),
- //   check('categories')
-  //      .isLength({ min: 6 })
- //       .withMessage('Pick at aleast one category')
+   check('categories')
+      .isLength({ min: 6 })
+      .withMessage('Pick at aleast one category')
 ];
 
 exports.userLoginValidator = [
@@ -47,3 +47,7 @@ exports.userUpdateValidator = [
         .isEmpty()
         .withMessage('Name is required')
 ];
+
+//isEmpty()
+//.withMessage('Name is required')
+///
