@@ -195,18 +195,18 @@ const Create = ({ token }) => {
                     <br />
                 </div>
             </div>
-            <div className="row">
-                <div className="col-md-4">
+            <div className="row container">
+                <div className="jumbotron col-md-4">
                     <div className="form-group">
-                        <label className="text-dark ml-4">Category</label>
+                        <label className="text-success ml-4">Category</label>
                         <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div className="form-group">
-                        <label className="text-dark ml-4">Type</label>
+                        <label className="text-danger ml-4">Type</label>
                         {showTypes()}
                     </div>
                     <div className="form-group">
-                        <label className="text-dark ml-4">Medium</label>
+                        <label className="text-warning ml-4">Medium</label>
                         {showMedium()}
                     </div>
                 </div>
