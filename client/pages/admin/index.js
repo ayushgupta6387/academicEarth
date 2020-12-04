@@ -6,13 +6,14 @@ const Admin = ({ user }) => (
     <Layout>
         <h1>Admin Dashboard</h1>
         <br />
-        <div className=" jumbotron row">
+        <div className="container">
+        <div className=" jumbotron col-md-6">
             <div className="col-md-4">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                    <h3><a href="/admin/category/create" className="nav-link text-primary">
+                    <h4><a href="/admin/category/create" className="nav-link text-primary">
                             Create category
-                        </a></h3>
+                        </a></h4>
                     </li>
                     <li className="nav-item">
                         <Link href="/admin/category/read">
@@ -32,6 +33,7 @@ const Admin = ({ user }) => (
                 </ul>
             </div>
             <div className="col-md-8"></div>
+        </div>
         </div>
     </Layout>
 );
