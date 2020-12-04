@@ -1,4 +1,6 @@
 # ``` Academic Earth ```
+![image](https://user-images.githubusercontent.com/53748350/101168034-d7c98280-3660-11eb-9227-c9fc09b787a1.png)
+
 Academic Earth believes that everyone has the right to a world-class education. We are building  a cloud based Web Application for online learners. 'E-Learning explores interactive technologies and communication systems to improve the learning experience.
    - ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Many people face the problem when they want to learn something new or they have some skills which they want to share among people, then they can add their content/sources on our web application.`
 
@@ -59,7 +61,7 @@ Install the dependencies and devDependencies and start the Server side.
 $ cd server
 $ npm install -y
 $ npm start
-```
+``` 
 
 License
 ----
