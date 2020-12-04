@@ -132,7 +132,7 @@ const Profile = ({ user, token }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-light ml-4">Category</label>
+                <label className="text-primary ml-4">Category</label>
                 <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>{showCategories()}</ul>
             </div>
 
@@ -144,12 +144,14 @@ const Profile = ({ user, token }) => {
 
     return (
         <Layout>
-            <div className="col-md-6 offset-md-3">
+            <div classname="container">
+            <div className="jumbotron col-md-6 offset-md-3">
                 <h1>Update Profile</h1>
                 <br />
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}
                 {updateForm()}
+            </div>
             </div>
         </Layout>
     );

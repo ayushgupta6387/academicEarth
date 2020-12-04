@@ -89,11 +89,11 @@ const Create = ({ user, token }) => {
     const createCategoryForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-white">Name</label>
+                <label className="text-success">Name</label>
                 <input onChange={handleChange('name')} value={name} type="text" className="form-control" required />
             </div>
             <div className="form-group">
-                <label className="text-white">Content</label>
+                <label className="text-success">Content</label>
                 <ReactQuill
                     value={content}
                     onChange={handleContent}
@@ -104,22 +104,22 @@ const Create = ({ user, token }) => {
                 />
             </div>
             <div className="form-group">
-                <label className="btn btn-outline-light">
+                <label className="btn btn-outline-primary">
                     {imageUploadButtonName}
                     <input onChange={handleImage} type="file" accept="image/*" className="form-control" hidden />
                 </label>
             </div>
             <div>
-                <button className="btn btn-dark">{buttonText}</button>
+                <button className="btn btn-primary">{buttonText}</button>
             </div>
         </form>
     );
 
     return (
         <Layout>
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                    <h1>Create category</h1>
+            <div className="Container row">
+                <div className="jumbotron col-md-6 offset-md-3">
+                    <h1 className="text-success">Create category</h1>
                     <br />
                     {success && showSuccessMessage(success)}
                     {error && showErrorMessage(error)}
