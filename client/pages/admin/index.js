@@ -7,8 +7,8 @@ const Admin = ({ user }) => (
         <h1>Admin Dashboard</h1>
         <br />
         <div className="container">
-        <div className=" jumbotron col-md-6">
-            <div className="col-md-4">
+        <div className=" jumbotron col-md-5">
+            <div className="col-md-8">
                 <ul className="nav flex-column">
                     <li className="nav-item">
                     <h4><a href="/admin/category/create" className="nav-link text-primary">
