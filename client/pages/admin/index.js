@@ -6,22 +6,22 @@ const Admin = ({ user }) => (
     <Layout>
         <h1>Admin Dashboard</h1>
         <br />
-        <div className="row">
+        <div className=" jumbotron row">
             <div className="col-md-4">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <a href="/admin/category/create" className="nav-link text-white">
+                        <a href="/admin/category/create" className="nav-link text-primary">
                             Create category
                         </a>
                     </li>
                     <li className="nav-item">
                         <Link href="/admin/category/read">
-                            <a className="nav-link text-white">All categories</a>
+                            <a className="nav-link text-danger">All categories</a>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link href="/admin/link/read">
-                            <a className="nav-link text-white">All Links</a>
+                            <a className="nav-link text-success">All Links</a>
                         </Link>
                     </li>
                     <li className="nav-item">
