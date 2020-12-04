@@ -26,7 +26,7 @@ const Admin = ({ user }) => (
                     </li>
                     <li className="nav-item">
                         <Link href="/user/profile/update">
-                            <a className="nav-link text-white">Profile update</a>
+                            <a className="nav-link text-warning">Profile update</a>
                         </Link>
                     </li>
                 </ul>
