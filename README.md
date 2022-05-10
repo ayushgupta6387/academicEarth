@@ -10,7 +10,14 @@ Academic Earth believes that everyone has the right to a world-class education. 
   - ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Users of our application could be anyone who wants to find a course, articles etc. from different online course providers. They will be able to like and share the course, they can add sources to our web application`
 
 
+ # Team Academic Earth
+| Name | Github Username |
+| ------ | ------ |
+| Ayush Gupta | [link ] |
+| Aman Kushwaha | [https://github.com/amankushwaha577/] |
+| Satish Narayan  | [link] |
  
+
 
 # Software Tech Specs
 ### BackEnd Tech
